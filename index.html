@@ -786,7 +786,7 @@ img { display: block; max-width: 100%; }
 /* ============================================================
    ПРО КОМПАНІЮ
    ============================================================ */
-.about-section { background: #f5f7fa; padding: 80px 24px; min-height: 100vh; display: flex; align-items: center; }
+.about-section { background: #f5f7fa; padding: 80px 24px; min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; }
 .about-inner {
   max-width: 1200px; margin: 0 auto;
   display: grid; grid-template-columns: 1fr 1fr;
@@ -1240,7 +1240,16 @@ img { display: block; max-width: 100%; }
      ПРО НАС
      ============================================================ -->
 <section class="about-section" id="about">
-  <div class="about-inner">
+  <!-- Particles фон -->
+  <div id="about-particles" style="
+    position:absolute;inset:0;
+    background: linear-gradient(135deg, #e8f4fd 0%, #b8d9f0 50%, #d0e8f8 100%);
+    z-index:0;
+  "></div>
+  <!-- Overlay 60% прозорість -->
+  <div style="position:absolute;inset:0;background:rgba(245,247,250,0.10);z-index:1;pointer-events:none;"></div>
+
+  <div class="about-inner" style="position:relative;z-index:2;">
     <div class="reveal">
       <div class="about-eyebrow"><span class="label-text" style="color:var(--blue);">Хто ми</span></div>
       <h2 class="about-title">Про<br><span>компанію</span><br>Сталеніт</h2>
@@ -1435,7 +1444,61 @@ const observer = new IntersectionObserver((entries) => {
 }, { threshold: 0.12 });
 reveals.forEach(el => observer.observe(el));
 
-/* RIPPLE НА КНОПКАХ */
+/* PARTICLES — блок Про Нас */
+(function() {
+  const script = document.createElement('script');
+  script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
+  script.async = true;
+  document.body.appendChild(script);
+  script.onload = function() {
+    window.particlesJS('about-particles', {
+      particles: {
+        number: { value: 80, density: { enable: true, value_area: 800 } },
+        color: { value: '#1a467f' },
+        shape: {
+          type: 'circle',
+          stroke: { width: 0.5, color: '#2558a0' }
+        },
+        opacity: {
+          value: 0.35,
+          random: true,
+          anim: { enable: true, speed: 0.8, opacity_min: 0.1 }
+        },
+        size: {
+          value: 3,
+          random: true,
+          anim: { enable: true, speed: 1.5, size_min: 0.8 }
+        },
+        line_linked: {
+          enable: true,
+          distance: 150,
+          color: '#1a467f',
+          opacity: 0.2,
+          width: 1
+        },
+        move: {
+          enable: true,
+          speed: 1.2,
+          random: true,
+          out_mode: 'bounce'
+        }
+      },
+      interactivity: {
+        detect_on: 'canvas',
+        events: {
+          onhover: { enable: true, mode: 'grab' },
+          onclick: { enable: true, mode: 'push' },
+          resize: true
+        },
+        modes: {
+          grab: { distance: 180, line_linked: { opacity: 0.5 } },
+          push: { particles_nb: 3 }
+        }
+      },
+      retina_detect: true
+    });
+  };
+})();
 document.querySelectorAll('.lm-btn, .nav-btn').forEach(btn => {
   btn.addEventListener('click', function(e) {
     const rect = this.getBoundingClientRect();
