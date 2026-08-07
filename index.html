@@ -119,9 +119,21 @@ img { display: block; max-width: 100%; }
   color: var(--white);
 }
 .nav-logo span { color: var(--bronze); }
+/* ============================================================
+   NAVBAR — LIQUID METAL СТИЛЬ
+   ============================================================ */
+.nav-logo img {
+  height: 38px;
+  display: block;
+  filter: drop-shadow(0 0 8px rgba(91,155,213,0.4));
+  transition: filter 0.3s;
+}
+.nav-logo:hover img {
+  filter: drop-shadow(0 0 14px rgba(91,155,213,0.7));
+}
 .nav-links {
   display: flex;
-  gap: 32px;
+  gap: 4px;
   list-style: none;
   position: absolute;
   left: 50%; transform: translateX(-50%);
@@ -130,10 +142,25 @@ img { display: block; max-width: 100%; }
   font-size: 13px;
   font-weight: 500;
   color: rgba(255,255,255,0.75);
-  transition: color 0.2s;
+  transition: all 0.2s;
   white-space: nowrap;
+  padding: 6px 14px;
+  border-radius: 100px;
+  position: relative;
 }
-.nav-links a:hover { color: var(--white); }
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 100px;
+  background: linear-gradient(135deg, rgba(26,70,127,0) 0%, rgba(91,155,213,0.15) 50%, rgba(26,70,127,0) 100%);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.nav-links a:hover {
+  color: var(--white);
+}
+.nav-links a:hover::after { opacity: 1; }
 .nav-right {
   display: flex;
   align-items: center;
@@ -253,38 +280,40 @@ img { display: block; max-width: 100%; }
     inset 0 2px 4px rgba(0,0,0,0.4);
 }
 
-/* Бронзовий варіант (акцент) */
+/* Бронзовий варіант — тепер такий самий як синій */
 .lm-btn-bronze {
   background: linear-gradient(135deg,
-    #8a6830 0%,
-    #c8a96e 20%,
-    #e8c980 40%,
-    #c8a96e 60%,
-    #a07840 80%,
-    #c8a96e 100%
+    #1a3a6e 0%,
+    #1a467f 20%,
+    #2a6abf 40%,
+    #1a467f 60%,
+    #0d2d5e 80%,
+    #1a467f 100%
   );
   background-size: 300% 300%;
-  color: rgba(0,0,0,0.8);
-  text-shadow: 0 1px 1px rgba(255,255,255,0.2);
+  color: rgba(255,255,255,0.85);
+  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
   box-shadow:
-    0 0 0 1px rgba(0,0,0,0.3),
+    0 0 0 1px rgba(0,0,0,0.4),
     0 9px 9px rgba(0,0,0,0.12),
-    inset 0 1px 0 rgba(255,255,255,0.3);
+    0 4px 4px rgba(0,0,0,0.15),
+    inset 0 1px 0 rgba(255,255,255,0.15);
 }
 .lm-btn-bronze::before {
-  background: linear-gradient(180deg, #7a5820 0%, #5a3a10 100%);
+  background: linear-gradient(180deg, #1e2a4a 0%, #0d1a35 100%);
 }
 .lm-btn-bronze::after {
   background: linear-gradient(135deg,
     transparent 0%,
-    rgba(255,255,255,0.3) 30%,
-    rgba(200,169,110,0.4) 50%,
-    rgba(255,255,255,0.2) 70%,
+    rgba(91,155,213,0.3) 30%,
+    rgba(200,169,110,0.2) 50%,
+    rgba(91,155,213,0.2) 70%,
     transparent 100%
   );
   background-size: 300% 300%;
+  animation: liquidShimmer 3s ease infinite;
 }
-.lm-btn-bronze span, .lm-btn-bronze i { color: rgba(0,0,0,0.75); }
+.lm-btn-bronze span, .lm-btn-bronze i { color: rgba(255,255,255,0.85); }
 
 /* Прозорий варіант (outline) */
 .lm-btn-ghost {
@@ -982,7 +1011,7 @@ img { display: block; max-width: 100%; }
       <a href="mailto:stalenitua@gmail.com" class="nav-email">stalenitua@gmail.com</a>
     </div>
     <a href="price.html" target="_blank" class="nav-btn">
-      <i class="ti ti-download"></i> Прайс
+      <i class="ti ti-download" style="position:relative;z-index:2;"></i> <span style="position:relative;z-index:2;">Прайс</span>
     </a>
   </div>
 </nav>
@@ -997,7 +1026,7 @@ img { display: block; max-width: 100%; }
   <div class="hero-fade" id="heroFade"></div>
   <div class="hero-overlay"></div>
   <div class="hero-content">
-    <div class="hero-eyebrow"><span class="label-text">Постачальник металопрокату — Київ</span></div>
+    <div class="hero-eyebrow"><span class="label-text">Постачальник металопрокату</span></div>
     <h1 class="hero-title display">Найбільший вибір металопрокату для <em>вашого виробництва</em></h1>
     <p class="hero-sub">Чорний, нержавіючий, кольоровий прокат та спецсталі.<br>Більше 30 років на ринку — швидка доставка по всій Україні.</p>
     <a href="tel:+380770776606" class="lm-btn">
@@ -1022,7 +1051,7 @@ img { display: block; max-width: 100%; }
   <div class="section-inner">
     <div class="section-header reveal">
       <p class="label-text">Чому обирають нас</p>
-      <h2 class="section-title display">Ми не найдешевші —<br>але ми надійні</h2>
+      <h2 class="section-title display">Метал під ваше виробництво —<br>вчасно і в повному обсязі</h2>
       <p class="section-sub">Швидкі, прозорі та зручні у роботі</p>
     </div>
     <div class="adv-grid">
