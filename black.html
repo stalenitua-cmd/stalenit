@@ -384,7 +384,12 @@ async function fetchSheet(name) {
     const text = await res.text();
     const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
     const rows = (json.table.rows || []).slice(1)
-      .map(r => r.c.map(c => c ? String(c.v ?? '') : ''))
+      .map(r => r.c.map(c => {
+        if (!c || c.v === null || c.v === undefined) return '';
+        // Якщо є форматоване значення f — використовуємо його (зберігає 1.5 як є)
+        if (c.f !== null && c.f !== undefined) return String(c.f);
+        return String(c.v);
+      }))
       .filter(r => r[0] && r[0].trim() !== '' && r[0] !== 'category');
     CACHE[name] = rows;
     return rows;
@@ -488,9 +493,16 @@ function renderTable() {
   const empty = document.getElementById('emptyState');
   const pagEl = document.getElementById('pag');
 
+  // Визначити чи є col2 в даних
+  const hasCol2 = filtered.some(r => r[3] && r[3] !== '—' && r[3] !== '');
+
   thead.innerHTML = `<tr>
-    <th>Параметр 1</th><th>Параметр 2</th><th>Марка / Тип</th>
-    <th>Ціна</th><th style="width:110px;"></th>
+    <th>Назва</th>
+    <th>Параметр 1</th>
+    ${hasCol2 ? '<th>Параметр 2</th>' : ''}
+    <th>Марка / Тип</th>
+    <th>Ціна</th>
+    <th style="width:110px;"></th>
   </tr>`;
 
   if (!filtered.length) {
@@ -509,8 +521,9 @@ function renderTable() {
       : `<span style="color:rgba(255,255,255,0.28);font-size:11px;">уточнюйте</span>`;
     const prod = `${name||CAT_META[activeCat].name} ${c1} ${c2} ${c3}`.replace(/'/g,"\\'");
     return `<tr>
+      <td>${name||'—'}</td>
       <td>${c1||'—'}</td>
-      <td>${c2||'—'}</td>
+      ${hasCol2 ? `<td>${c2||'—'}</td>` : ''}
       <td><span class="td-badge">${c3||'—'}</span></td>
       <td>${priceHtml}</td>
       <td><button class="order-btn" onclick="openModal('${prod}')"><i class="ti ti-shopping-cart"></i>Замовити</button></td>
