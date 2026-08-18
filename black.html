@@ -1,332 +1,563 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Чорний металопрокат — купити в Україні | Сталеніт</title>
+<meta name="description" content="Чорний металопрокат: труби, круги, листи, кутники, балки, арматура. Склади: Київ, Дніпро, Харків, Запоріжжя. Доставка по всій Україні. Платник ПДВ.">
+<link rel="canonical" href="https://stalenit.com/black">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"Сталеніт","url":"https://stalenit.com","telephone":"+380770776606"}</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
+<style>
+:root{--night:#0a0e1a;--deep:#0f1420;--blue:#1a467f;--blue2:#2558a0;--bronze:#c8a96e;--muted:#8fa3b8;--white:#fff;--surface:rgba(255,255,255,0.04);--border:rgba(255,255,255,0.08);--r:10px;}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{font-family:'Inter',sans-serif;background:var(--night);color:var(--white);-webkit-font-smoothing:antialiased;}
+a{text-decoration:none;color:inherit;}
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:1000;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 40px;background:rgba(10,14,26,0.96);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);}
+.nav-logo img{height:36px;filter:drop-shadow(0 0 6px rgba(91,155,213,0.4));}
+.nav-links{display:flex;gap:4px;list-style:none;position:absolute;left:50%;transform:translateX(-50%);}
+.nav-links a{font-size:13px;font-weight:500;color:rgba(255,255,255,0.7);padding:5px 13px;border-radius:100px;transition:all .2s;}
+.nav-links a:hover{color:#fff;background:rgba(26,70,127,0.2);}
+.nav-links a.act{color:#fff;background:rgba(26,70,127,0.3);}
+.nav-right{display:flex;align-items:center;gap:14px;}
+.nav-phone{font-size:13px;font-weight:700;color:#fff;}
+.nav-email{font-size:11px;color:var(--muted);}
+/* LM BTN */
+.lm-btn{position:relative;display:inline-flex;align-items:center;justify-content:center;gap:7px;padding:0 18px;height:36px;border:none;border-radius:100px;font-family:'Inter',sans-serif;font-size:13px;font-weight:600;cursor:pointer;overflow:hidden;color:rgba(255,255,255,.9);background:linear-gradient(135deg,#1a3a6e,#1a467f,#2a6abf,#1a467f,#0d2d5e,#1a467f);background-size:300% 300%;animation:liqShift 4s ease infinite;box-shadow:0 0 0 1px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.15);transition:transform .15s;text-decoration:none;}
+.lm-btn::before{content:'';position:absolute;inset:2px;border-radius:100px;background:linear-gradient(180deg,#1e2a4a,#0d1a35);z-index:0;}
+.lm-btn i,.lm-btn span{position:relative;z-index:2;}
+.lm-btn:hover{transform:translateY(-1px);}
+.lm-btn-lg{height:48px;padding:0 32px;font-size:15px;font-weight:700;border-radius:8px;}
+.lm-btn-lg::before{border-radius:6px;}
+@keyframes liqShift{0%{background-position:0 50%}50%{background-position:100% 50%}100%{background-position:0 50%}}
+@keyframes spin{to{transform:rotate(360deg)}}
+/* HERO */
+.hero{padding:76px 40px 24px;background:linear-gradient(135deg,var(--night),var(--deep));border-bottom:1px solid var(--border);position:relative;overflow:hidden;}
+.hero::before{content:'';position:absolute;top:-200px;left:-100px;width:700px;height:500px;background:radial-gradient(ellipse,rgba(26,70,127,0.18) 0%,transparent 70%);pointer-events:none;}
+.hero-inner{max-width:1280px;margin:0 auto;position:relative;}
+.breadcrumb{display:flex;align-items:center;gap:8px;font-size:12px;color:var(--muted);margin-bottom:14px;flex-wrap:wrap;}
+.breadcrumb a{color:var(--muted);transition:color .2s;}
+.breadcrumb a:hover{color:#fff;}
+.hero h1{font-family:'Barlow Condensed',sans-serif;font-size:clamp(32px,5vw,56px);font-weight:900;text-transform:uppercase;line-height:1.05;margin-bottom:14px;color:#fff;}
+.hero-sub{font-size:14px;color:rgba(255,255,255,0.65);max-width:700px;line-height:1.65;margin-bottom:16px;}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:20px;}
+.badge-pill{display:flex;align-items:center;gap:5px;padding:5px 12px;background:var(--surface);border:1px solid var(--border);border-radius:100px;font-size:11px;font-weight:500;color:rgba(255,255,255,0.7);}
+.badge-pill i{font-size:12px;color:var(--blue2);}
+.hero-cta{display:flex;align-items:center;gap:20px;flex-wrap:wrap;}
+.hero-phone-link{font-size:18px;font-weight:700;color:#fff;transition:color .2s;}
+.hero-phone-link:hover{color:var(--bronze);}
+/* SHOP LAYOUT */
+.shop-wrap{max-width:1280px;margin:0 auto;padding:16px 40px 40px;}
+.price-note{display:flex;align-items:center;gap:8px;padding:8px 14px;background:rgba(200,169,110,0.08);border:1px solid rgba(200,169,110,0.25);border-radius:8px;margin-bottom:14px;font-size:12px;color:rgba(255,255,255,0.75);}
+.price-note i{color:var(--bronze);font-size:15px;flex-shrink:0;}
+.price-note strong{color:var(--bronze);}
+.shop-layout{display:grid;grid-template-columns:200px 1fr;gap:18px;align-items:start;}
+@media(max-width:900px){.shop-layout{grid-template-columns:1fr;}}
+/* SIDEBAR */
+.filters{position:sticky;top:72px;}
+.filter-prais-btn{width:100%;margin-bottom:14px;}
+.filter-prais-btn a{display:flex;align-items:center;justify-content:center;gap:8px;width:100%;padding:10px;background:linear-gradient(135deg,#1a3a6e,#1a467f,#2a6abf,#1a467f);background-size:300% 300%;animation:liqShift 4s ease infinite;border:none;border-radius:8px;font-family:'Inter',sans-serif;font-size:13px;font-weight:700;color:#fff;cursor:pointer;text-decoration:none;position:relative;overflow:hidden;}
+.filter-prais-btn a::before{content:'';position:absolute;inset:2px;border-radius:6px;background:linear-gradient(180deg,#1e2a4a,#0d1a35);z-index:0;}
+.filter-prais-btn a i,.filter-prais-btn a span{position:relative;z-index:1;}
+.filter-label-top{display:flex;align-items:center;gap:6px;font-size:11px;font-weight:700;color:var(--muted);margin-bottom:10px;text-transform:uppercase;letter-spacing:.08em;}
+.filter-group{margin-bottom:10px;border:1px solid var(--border);border-radius:8px;overflow:hidden;}
+.filter-head{display:flex;align-items:center;justify-content:space-between;padding:9px 12px;cursor:pointer;background:rgba(255,255,255,0.03);transition:background .15s;user-select:none;}
+.filter-head:hover{background:rgba(255,255,255,0.06);}
+.filter-head-name{font-size:11px;font-weight:700;color:rgba(255,255,255,0.85);text-transform:uppercase;letter-spacing:.06em;}
+.filter-head i{font-size:13px;color:var(--muted);transition:transform .2s;}
+.filter-group.open .filter-head i{transform:rotate(180deg);}
+.filter-body{display:none;padding:8px 12px;border-top:1px solid var(--border);}
+.filter-group.open .filter-body{display:block;}
+.filter-tags{display:flex;flex-wrap:wrap;gap:4px;}
+.f-tag{padding:3px 9px;border-radius:100px;background:var(--surface);border:1px solid var(--border);font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;transition:all .15s;}
+.f-tag:hover{border-color:var(--blue);color:#fff;}
+.f-tag.act{background:rgba(26,70,127,0.3);border-color:var(--blue);color:#7ab8ff;}
+.filter-actions{display:flex;gap:8px;margin-top:12px;}
+.btn-reset{flex:1;padding:8px;background:var(--surface);border:1px solid var(--border);border-radius:8px;font-size:11px;font-weight:600;color:var(--muted);cursor:pointer;font-family:'Inter',sans-serif;transition:all .15s;}
+.btn-reset:hover{border-color:var(--blue);color:#fff;}
+.btn-apply{flex:1;padding:8px;background:var(--blue);border:1px solid var(--blue);border-radius:8px;font-size:11px;font-weight:700;color:#fff;cursor:pointer;font-family:'Inter',sans-serif;}
+/* PHOTO CATS */
+.photo-cats-title{font-size:11px;font-weight:700;color:var(--muted);margin-bottom:8px;text-transform:uppercase;letter-spacing:.08em;}
+.photo-cats{display:grid;grid-template-columns:repeat(9,1fr);gap:5px;margin-bottom:12px;}
+@media(max-width:1100px){.photo-cats{grid-template-columns:repeat(6,1fr);}}
+@media(max-width:700px){.photo-cats{grid-template-columns:repeat(4,1fr);}}
+.photo-cat{background:var(--surface);border:1px solid var(--border);border-radius:7px;overflow:hidden;cursor:pointer;transition:all .2s;}
+.photo-cat:hover{border-color:rgba(26,70,127,0.5);transform:translateY(-1px);}
+.photo-cat.active{border-color:var(--blue);background:rgba(26,70,127,0.15);}
+.photo-cat-img{width:100%;aspect-ratio:1/1;object-fit:contain;background:#fff;padding:4px;}
+.photo-cat-body{padding:4px 6px;}
+.photo-cat-name{font-size:10px;font-weight:700;color:#fff;line-height:1.3;}
+.photo-cat-cnt{font-size:9px;color:var(--bronze);}
+/* PROD NOTE */
+.prod-note{display:flex;align-items:center;gap:8px;padding:7px 12px;background:rgba(200,169,110,0.07);border:1px solid rgba(200,169,110,0.2);border-radius:8px;margin-bottom:12px;font-size:11px;color:rgba(255,255,255,0.65);}
+.prod-note i{color:var(--bronze);font-size:14px;flex-shrink:0;}
+/* TABLE */
+.tbl-wrap{overflow-x:auto;border:1px solid var(--border);border-radius:var(--r);}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+thead{background:rgba(26,70,127,0.25);}
+th{color:rgba(255,255,255,0.7);padding:9px 14px;text-align:left;font-weight:600;font-size:11px;letter-spacing:.05em;text-transform:uppercase;border-bottom:1px solid var(--border);white-space:nowrap;}
+tbody tr{border-bottom:1px solid rgba(255,255,255,0.04);transition:background .12s;}
+tbody tr:last-child{border-bottom:none;}
+tbody tr:hover{background:rgba(26,70,127,0.08);}
+td{padding:8px 14px;color:rgba(255,255,255,0.8);vertical-align:middle;}
+td:first-child{font-weight:600;color:#fff;}
+.td-badge{display:inline-block;padding:2px 8px;border-radius:8px;background:rgba(26,70,127,0.25);border:1px solid rgba(26,70,127,0.4);font-size:11px;color:#a8d0f8;font-weight:600;}
+.order-btn{display:inline-flex;align-items:center;gap:5px;padding:4px 12px;border-radius:100px;background:rgba(26,70,127,0.3);border:1px solid rgba(26,70,127,0.45);font-size:12px;color:#7ab8ff;cursor:pointer;transition:all .15s;white-space:nowrap;font-family:'Inter',sans-serif;}
+.order-btn:hover{background:var(--blue);color:#fff;}
+/* PAG */
+.pag{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:16px;flex-wrap:wrap;}
+.p-btn{width:34px;height:34px;border-radius:7px;background:var(--surface);border:1px solid var(--border);color:var(--muted);font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;font-family:'Inter',sans-serif;transition:all .15s;}
+.p-btn:hover{border-color:var(--blue);color:#fff;}
+.p-btn.act{background:var(--blue);border-color:var(--blue);color:#fff;}
+.p-info{font-size:12px;color:var(--muted);padding:0 8px;}
+/* EMPTY */
+.empty{text-align:center;padding:40px 20px;}
+.empty i{font-size:36px;color:var(--muted);display:block;margin-bottom:10px;}
+.empty p{font-size:13px;color:var(--muted);}
+/* SEO */
+.seo-section{padding:32px 40px;border-top:1px solid var(--border);background:var(--deep);}
+.seo-inner{max-width:1280px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:32px;}
+@media(max-width:768px){.seo-inner{grid-template-columns:1fr;}}
+.seo-block h2{font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:900;text-transform:uppercase;margin-bottom:10px;}
+.seo-block h3{font-size:14px;font-weight:700;color:#fff;margin:12px 0 6px;}
+.seo-block p{font-size:13px;color:var(--muted);line-height:1.7;margin-bottom:6px;}
+.seo-block ul{list-style:none;padding:0;}
+.seo-block ul li{font-size:13px;color:var(--muted);line-height:1.6;padding-left:14px;position:relative;}
+.seo-block ul li::before{content:'—';position:absolute;left:0;color:var(--bronze);}
+/* FOOTER */
+footer{background:#060810;padding:20px 40px;border-top:1px solid var(--border);}
+.footer-inner{max-width:1280px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;}
+footer p{font-size:12px;color:rgba(255,255,255,0.28);}
+footer span{color:rgba(255,255,255,0.45);}
+.footer-nav{display:flex;gap:14px;flex-wrap:wrap;}
+.footer-nav a{font-size:12px;color:rgba(255,255,255,0.35);transition:color .2s;}
+.footer-nav a:hover{color:#fff;}
+/* MODAL */
+.modal-bg{position:fixed;inset:0;background:rgba(0,0,0,0.8);z-index:2000;display:none;align-items:center;justify-content:center;backdrop-filter:blur(4px);padding:20px;}
+.modal-bg.open{display:flex;}
+.modal{background:var(--deep);border:1px solid var(--border);border-radius:14px;padding:28px;width:100%;max-width:500px;position:relative;}
+.modal-x{position:absolute;top:12px;right:12px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:20px;}
+.modal-x:hover{color:#fff;}
+.modal-title{font-size:17px;font-weight:800;color:#fff;margin-bottom:4px;}
+.modal-prod{font-size:12px;color:var(--bronze);margin-bottom:18px;font-weight:600;line-height:1.4;}
+.m-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;}
+.m-group{display:flex;flex-direction:column;gap:4px;}
+.m-group.full{grid-column:span 2;}
+.m-label{font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);}
+.m-input,.m-textarea{width:100%;padding:9px 12px;background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.1);border-radius:8px;font-size:13px;color:#fff;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s;}
+.m-input::placeholder,.m-textarea::placeholder{color:rgba(255,255,255,0.25);}
+.m-input:focus,.m-textarea:focus{border-color:var(--blue);}
+.m-textarea{resize:vertical;min-height:68px;}
+.m-submit{width:100%;margin-top:12px;padding:12px;position:relative;display:flex;align-items:center;justify-content:center;gap:8px;border:none;border-radius:8px;font-size:14px;font-weight:700;font-family:'Inter',sans-serif;cursor:pointer;overflow:hidden;background:linear-gradient(135deg,#1a3a6e,#1a467f,#2a6abf,#1a467f);background-size:300% 300%;animation:liqShift 4s ease infinite;color:rgba(255,255,255,.9);}
+.m-submit::before{content:'';position:absolute;inset:2px;border-radius:6px;background:linear-gradient(180deg,#1e2a4a,#0d1a35);z-index:0;}
+.m-submit span,.m-submit i{position:relative;z-index:1;}
+.m-ok{display:none;text-align:center;padding:16px 0;}
+.m-ok-icon{width:56px;height:56px;border-radius:50%;background:linear-gradient(135deg,#1a3a6e,#2a6abf);display:flex;align-items:center;justify-content:center;margin:0 auto 12px;animation:okPop .5s cubic-bezier(.34,1.56,.64,1);}
+.m-ok-icon i{font-size:24px;color:#fff;}
+@keyframes okPop{0%{transform:scale(0)}60%{transform:scale(1.15)}100%{transform:scale(1)}}
+@media(max-width:900px){.nav-links,.nav-email{display:none;}.nav{padding:0 20px;}.hero,.shop-wrap,.seo-section{padding-left:20px;padding-right:20px;}}
+@media(max-width:600px){.m-grid{grid-template-columns:1fr;}.m-group.full{grid-column:span 1;}}
+</style>
+</head>
+<body>
+
+<nav class="nav">
+  <a href="index.html"><img src="logo-stalenit-white.png" alt="Сталеніт" style="height:36px;"></a>
+  <ul class="nav-links">
+    <li><a href="index.html">Головна</a></li>
+    <li><a href="catalog.html" class="act">Каталог</a></li>
+    <li><a href="index.html#services">Послуги</a></li>
+    <li><a href="index.html#about">Про Нас</a></li>
+    <li><a href="index.html#contacts">Контакти</a></li>
+  </ul>
+  <div class="nav-right">
+    <div>
+      <div class="nav-phone"><a href="tel:+380770776606" style="color:#fff;font-size:13px;font-weight:700;">+38 (077) 077 66 06</a></div>
+      <div class="nav-email">stalenitua@gmail.com</div>
+    </div>
+    <a href="price.html" target="_blank" class="lm-btn"><i class="ti ti-download"></i><span>Прайс</span></a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-inner">
+    <nav class="breadcrumb">
+      <a href="index.html">Головна</a> <span style="color:rgba(255,255,255,0.25);">›</span>
+      <a href="catalog.html">Каталог</a> <span style="color:rgba(255,255,255,0.25);">›</span>
+      <span>Чорний металопрокат</span>
+    </nav>
+    <h1>Чорний металопрокат</h1>
+    <p class="hero-sub">Труби безшовні та зварні, круги, листи сталеві, кутники, балки, швелери, арматура, шестигранники. <strong style="color:rgba(255,255,255,0.9);">5000+ позицій</strong> в наявності. Доставка по всій Україні. Платник ПДВ.</p>
+    <div class="badges">
+      <div class="badge-pill"><i class="ti ti-check"></i> Наявність на складі</div>
+      <div class="badge-pill"><i class="ti ti-check"></i> Платник ПДВ</div>
+      <div class="badge-pill"><i class="ti ti-check"></i> Доставка по всій Україні</div>
+      <div class="badge-pill"><i class="ti ti-check"></i> Сертифікати якості</div>
+      <div class="badge-pill"><i class="ti ti-check"></i> Порізка в розмір</div>
+    </div>
+    <div class="hero-cta">
+      <button class="lm-btn lm-btn-lg" onclick="openModal('Чорний металопрокат — запит')">
+        <i class="ti ti-shopping-cart"></i><span>Замовити</span>
+      </button>
+      <a href="tel:+380770776606" class="hero-phone-link">+38 (077) 077 66 06</a>
+    </div>
+  </div>
+</section>
+
+<div class="shop-wrap">
+  <div class="price-note">
+    <i class="ti ti-info-circle"></i>
+    <span><strong>Зверніть увагу:</strong> ціна залежить від об'єму замовлення. Для деяких позицій є мінімальний об'єм. Уточнюйте у менеджера.</span>
+  </div>
+  <div class="shop-layout">
+    <!-- ФІЛЬТРИ -->
+    <aside class="filters">
+      <div class="filter-prais-btn">
+        <a href="price.html" target="_blank"><i class="ti ti-download"></i><span>Прайс-лист</span></a>
+      </div>
+      <div class="filter-label-top"><i class="ti ti-adjustments-horizontal"></i> Фільтр</div>
+      <div class="filter-group open" id="fg-diam">
+        <div class="filter-head" onclick="toggleFilter('fg-diam')">
+          <span class="filter-head-name">Діаметр</span><i class="ti ti-chevron-down"></i>
+        </div>
+        <div class="filter-body"><div class="filter-tags" id="ft-diam"></div></div>
+      </div>
+      <div class="filter-group" id="fg-shelf">
+        <div class="filter-head" onclick="toggleFilter('fg-shelf')">
+          <span class="filter-head-name">Полиця</span><i class="ti ti-chevron-down"></i>
+        </div>
+        <div class="filter-body"><div class="filter-tags" id="ft-shelf"></div></div>
+      </div>
+      <div class="filter-group" id="fg-thick">
+        <div class="filter-head" onclick="toggleFilter('fg-thick')">
+          <span class="filter-head-name">Товщина</span><i class="ti ti-chevron-down"></i>
+        </div>
+        <div class="filter-body"><div class="filter-tags" id="ft-thick"></div></div>
+      </div>
+      <div class="filter-group" id="fg-wall">
+        <div class="filter-head" onclick="toggleFilter('fg-wall')">
+          <span class="filter-head-name">Товщина стінки</span><i class="ti ti-chevron-down"></i>
+        </div>
+        <div class="filter-body"><div class="filter-tags" id="ft-wall"></div></div>
+      </div>
+      <div class="filter-group" id="fg-grade">
+        <div class="filter-head" onclick="toggleFilter('fg-grade')">
+          <span class="filter-head-name">Марка</span><i class="ti ti-chevron-down"></i>
+        </div>
+        <div class="filter-body"><div class="filter-tags" id="ft-grade"></div></div>
+      </div>
+      <div class="filter-actions">
+        <button class="btn-reset" onclick="resetFilters()">Скасувати</button>
+        <button class="btn-apply" onclick="applyFilters()">Застосувати</button>
+      </div>
+    </aside>
+
+    <!-- ПРАВА ЧАСТИНА -->
+    <div>
+      <div class="photo-cats-title" id="photoCatsTitle">Оберіть категорію</div>
+      <div class="photo-cats" id="photoCats"></div>
+      <div class="prod-note">
+        <i class="ti ti-alert-circle"></i>
+        Ціна залежить від об'єму замовлення. Для уточнення — зателефонуйте або натисніть «Замовити».
+      </div>
+      <div class="tbl-wrap">
+        <table>
+          <thead id="tHead"></thead>
+          <tbody id="tBody"></tbody>
+        </table>
+        <div class="empty" id="emptyState" style="display:none;">
+          <i class="ti ti-search-off"></i><p>Нічого не знайдено — скиньте фільтри</p>
+        </div>
+      </div>
+      <div class="pag" id="pag"></div>
+    </div>
+  </div>
+</div>
+
+<section class="seo-section">
+  <div class="seo-inner">
+    <div class="seo-block">
+      <h2>Чорний металопрокат — купити в Україні</h2>
+      <p>Компанія <strong style="color:#fff;">Сталеніт</strong> — постачальник чорного металопрокату для підприємств по всій Україні. Склади у Києві, Дніпрі, Харкові та Запоріжжі.</p>
+      <h3>Чому обирають Сталеніт?</h3>
+      <ul>
+        <li>Наявність на складі — відвантаження в день замовлення</li>
+        <li>Офіційна робота з ПДВ — повний пакет документів</li>
+        <li>Порізка в розмір за кресленнями замовника</li>
+        <li>Доставка по всій Україні</li>
+        <li>Сертифікати якості на всю продукцію</li>
+      </ul>
+    </div>
+    <div class="seo-block">
+      <h2>Марки та стандарти</h2>
+      <h3>Труби безшовні (ГОСТ 8732-78)</h3>
+      <p>Марки: ст20, ст35, ст40х, ст45, ст30хгса. Діаметр 10–168 мм.</p>
+      <h3>Круги та прутки (ГОСТ 2590-2006)</h3>
+      <p>Гарячекатані та калібровані. Марки: ст3, ст20, ст35, ст40х, ст45, ст65г, У8А.</p>
+      <h3>Листи сталеві (ГОСТ 19903-74)</h3>
+      <p>Г/к, х/к, оцинковані, рифлені. Марки: ст.3, 09г2с, 17г1с, ХВГ.</p>
+      <h3>Фасонний прокат</h3>
+      <p>Кутник, балка IPE та Б, швелер, арматура. Марки S235JR, S355.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div>
+      <p>© 2024 ТОВ «Українська Компанія «Сталеніт»</p>
+      <p>ЄДРПОУ: <span>45109230</span> &nbsp;·&nbsp; ПДВ: <span>451092326576</span></p>
+    </div>
+    <nav class="footer-nav">
+      <a href="index.html">Головна</a>
+      <a href="catalog.html">Каталог</a>
+      <a href="index.html#contacts">Контакти</a>
+    </nav>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="modal-bg" id="modalBg">
+  <div class="modal">
+    <button class="modal-x" onclick="closeModal()"><i class="ti ti-x"></i></button>
+    <div id="mFormWrap">
+      <div class="modal-title">Замовити</div>
+      <div class="modal-prod" id="mProd"></div>
+      <form id="mForm" onsubmit="submitModal(event)">
+        <input type="hidden" name="product" id="mProdInput">
+        <div class="m-grid">
+          <div class="m-group"><label class="m-label">Ім'я</label><input class="m-input" name="name" placeholder="Ваше ім'я" required></div>
+          <div class="m-group"><label class="m-label">Телефон</label><input class="m-input" name="phone" placeholder="+38 (___) ___ __ __" required></div>
+          <div class="m-group"><label class="m-label">Компанія</label><input class="m-input" name="company" placeholder="Назва компанії"></div>
+          <div class="m-group"><label class="m-label">Email</label><input class="m-input" type="email" name="email" placeholder="email@company.ua"></div>
+          <div class="m-group full"><label class="m-label">Коментар</label><textarea class="m-textarea" name="message" placeholder="Кількість, терміни..."></textarea></div>
+        </div>
+        <button type="submit" class="m-submit"><i class="ti ti-send"></i><span>Надіслати запит</span></button>
+      </form>
+    </div>
+    <div class="m-ok" id="mOk">
+      <div class="m-ok-icon"><i class="ti ti-check"></i></div>
+      <div style="font-size:17px;font-weight:800;color:#fff;margin-bottom:6px;">Запит відправлено!</div>
+      <div style="font-size:13px;color:var(--muted);">Менеджер зв'яжеться найближчим часом</div>
+    </div>
+  </div>
+</div>
+
 <script>
 /* ============================================================
-   GOOGLE SHEETS ПІДКЛЮЧЕННЯ
-   ID таблиці — змінювати тут якщо таблиця зміниться
+   GOOGLE SHEETS
    ============================================================ */
 const SHEET_ID = '1jqWOwfwcIVoP9-gpp0uuJeNMgYbpZlTbiF9BsTFurUc';
 
-/* Метадані категорій — назви, фото, фільтри */
 const CAT_META = {
-  pipe:    { name:'Труба безшовна',  img:'pipe.jpg',     cnt:'160+', filterCol:{diam:0,wall:1,grade:2} },
-  round:   { name:'Круг металевий',  img:'round.jpg',    cnt:'400+', filterCol:{diam:0,grade:1} },
-  sheet:   { name:'Лист сталевий',   img:'sheet.jpg',    cnt:'85+',  filterCol:{thick:0,grade:1} },
-  profile: { name:'Труба профільна', img:'profile.jpg',  cnt:'130+', filterCol:{} },
-  weld:    { name:'Труба зварна',    img:'pipe.jpg',     cnt:'12',   filterCol:{diam:0,wall:1} },
-  angle:   { name:'Кутник',          img:'angle.jpg',    cnt:'65+',  filterCol:{shelf:0} },
-  beam:    { name:'Балка / Двотавр', img:'beam.jpg',     cnt:'16',   filterCol:{} },
-  channel: { name:'Швелер',          img:'channel.jpg',  cnt:'10',   filterCol:{} },
-  rebar:   { name:'Арматура',        img:'rebar.jpg',    cnt:'12',   filterCol:{diam:0,grade:1} },
-  hex:     { name:'Шестигранник',    img:'hex.jpg',      cnt:'90+',  filterCol:{diam:0,grade:1} },
-  square:  { name:'Квадрат',         img:'square.jpg',   cnt:'50+',  filterCol:{diam:0,grade:1} },
-  strip:   { name:'Смуга',           img:'strip.jpg',    cnt:'60+',  filterCol:{grade:1} },
+  pipe:    { name:'Труба безшовна',  img:'pipe.jpg',    cnt:'160+' },
+  round:   { name:'Круг металевий',  img:'round.jpg',   cnt:'400+' },
+  sheet:   { name:'Лист сталевий',   img:'sheet.jpg',   cnt:'85+'  },
+  profile: { name:'Труба профільна', img:'profile.jpg', cnt:'130+' },
+  weld:    { name:'Труба зварна',    img:'pipe.jpg',    cnt:'12'   },
+  angle:   { name:'Кутник',          img:'angle.jpg',   cnt:'65+'  },
+  beam:    { name:'Балка / Двотавр', img:'beam.jpg',    cnt:'16'   },
+  channel: { name:'Швелер',          img:'channel.jpg', cnt:'10'   },
+  rebar:   { name:'Арматура',        img:'rebar.jpg',   cnt:'12'   },
+  hex:     { name:'Шестигранник',    img:'hex.jpg',     cnt:'90+'  },
+  square:  { name:'Квадрат',         img:'square.jpg',  cnt:'50+'  },
+  strip:   { name:'Смуга',           img:'strip.jpg',   cnt:'60+'  },
 };
 
-/* Кеш даних з таблиці */
-const SHEETS_CACHE = {};
-let sheetsLoading = false;
-
-/* Завантажити аркуш з Google Sheets */
-async function fetchSheet(sheetName) {
-  if (SHEETS_CACHE[sheetName]) return SHEETS_CACHE[sheetName];
-
-  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${sheetName}`;
-  try {
-    const res = await fetch(url);
-    const text = await res.text();
-    // Google повертає JSONP — прибираємо обгортку
-    const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
-    const rows = json.table.rows || [];
-    // Пропускаємо рядок заголовка (row 0 = заголовки колонок)
-    const data = rows.slice(1).map(r => r.c.map(c => c ? (c.v !== null && c.v !== undefined ? String(c.v) : '') : '')).filter(r => r[0] && r[0].trim());
-    SHEETS_CACHE[sheetName] = data;
-    return data;
-  } catch(e) {
-    console.error('Помилка завантаження аркуша', sheetName, e);
-    return [];
-  }
-}
-
-/* ============================================================
-   СТАН
-   ============================================================ */
+const CACHE = {};
 let activeCat = 'pipe';
 let filters = { diam:'', shelf:'', thick:'', wall:'', grade:'' };
 let page = 1;
 const PER = 25;
-let currentRows = []; // рядки поточної категорії з таблиці
-let currentCols = []; // заголовки колонок
+let currentRows = [];
 
-/* Завантажити і показати категорію */
-async function loadCategory(catKey) {
-  // Показати лоадер
-  document.getElementById('tBody').innerHTML = `<tr><td colspan="10" style="text-align:center;padding:32px;color:var(--muted);">
-    <i class="ti ti-loader" style="font-size:24px;display:block;margin-bottom:8px;animation:spin 1s linear infinite;"></i>
-    Завантаження даних...
-  </td></tr>`;
-  document.getElementById('pag').innerHTML = '';
-
-  const rows = await fetchSheet(catKey);
-  if (!rows.length) {
-    document.getElementById('tBody').innerHTML = `<tr><td colspan="10" style="text-align:center;padding:32px;color:var(--muted);">Дані не знайдено. Перевірте таблицю.</td></tr>`;
-    return;
+/* Завантажити дані з Google Sheets */
+async function fetchSheet(name) {
+  if (CACHE[name]) return CACHE[name];
+  const url = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json&sheet=${name}`;
+  try {
+    const res  = await fetch(url);
+    const text = await res.text();
+    const json = JSON.parse(text.match(/google\.visualization\.Query\.setResponse\(([\s\S]*)\)/)[1]);
+    const rows = (json.table.rows || []).slice(1)
+      .map(r => r.c.map(c => c ? String(c.v ?? '') : ''))
+      .filter(r => r[0] && r[0].trim() !== '' && r[0] !== 'category');
+    CACHE[name] = rows;
+    return rows;
+  } catch(e) {
+    console.error('Sheets error', name, e);
+    return [];
   }
-
-  // Перший рядок після заголовка — беремо заголовки з першого fetch
-  // Заголовки: category, name, col1, col2, col3, price, available
-  // Показуємо col1..col3 як колонки таблиці (без category, name, available)
-  currentRows = rows;
-
-  // Визначити заголовки колонок з назв у метаданих
-  // col1=індекс2, col2=індекс3, col3=індекс4, price=індекс5
-  const meta = CAT_META[catKey];
-
-  // Оновити фільтри динамічно з даних
-  buildFiltersFromData(rows, meta);
-  renderTable();
 }
 
-/* Побудувати фільтри з реальних даних таблиці */
-function buildFiltersFromData(rows, meta) {
-  const fc = meta.filterCol;
-
-  // col1 → може бути diam або shelf або thick
-  const col1vals = [...new Set(rows.map(r => r[2]).filter(Boolean))].sort((a,b)=>parseFloat(a)-parseFloat(b));
-  const col2vals = [...new Set(rows.map(r => r[3]).filter(Boolean).filter(v=>v!=='—'))].sort();
-  const col3vals = [...new Set(rows.map(r => r[4]).filter(Boolean).filter(v=>v!=='—'))].sort();
-
-  // Діаметр
-  if ('diam' in fc) { showFilter('fg-diam','ft-diam',col1vals,'diam'); }
-  else hideFilter('fg-diam');
-
-  // Полиця
-  if ('shelf' in fc) { showFilter('fg-shelf','ft-shelf',col1vals,'shelf'); }
-  else hideFilter('fg-shelf');
-
-  // Товщина
-  if ('thick' in fc) { showFilter('fg-thick','ft-thick',col1vals,'thick'); }
-  else hideFilter('fg-thick');
-
-  // Товщина стінки
-  if ('wall' in fc) { showFilter('fg-wall','ft-wall',col2vals,'wall'); }
-  else hideFilter('fg-wall');
-
-  // Марка — з col3 або col2 залежно від категорії
-  const gradeVals = col3vals.length ? col3vals : col2vals;
-  if (gradeVals.length) { showFilter('fg-grade','ft-grade',gradeVals,'grade'); }
-  else hideFilter('fg-grade');
-}
-
-function showFilter(groupId, containerId, vals, key) {
-  const g = document.getElementById(groupId);
-  const c = document.getElementById(containerId);
-  if (!g || !c) return;
-  g.style.display = '';
-  c.innerHTML = vals.map(v =>
-    `<span class="f-tag${filters[key]===v?' act':''}" onclick="setFilter('${key}','${v.replace(/'/g,"\\'")}')">${v}</span>`
-  ).join('');
-}
-
-function hideFilter(groupId) {
-  const g = document.getElementById(groupId);
-  if (g) g.style.display = 'none';
-}
-
-/* ============================================================
-   РЕНДЕР ФОТО-КАТЕГОРІЙ
-   ============================================================ */
+/* ФОТО-КАТЕГОРІЇ */
 function renderPhotoCats() {
-  const wrap = document.getElementById('photoCats');
-  wrap.innerHTML = Object.entries(CAT_META).map(([k,v]) => `
-    <div class="photo-cat${k===activeCat?' active':''}" onclick="selectCatDirect('${k}')">
-      <img class="photo-cat-img" src="${v.img}" alt="${v.name}" loading="lazy"
-        onerror="this.src='';this.style.background='#1a2a4a';this.style.padding='20px';">
+  document.getElementById('photoCats').innerHTML = Object.entries(CAT_META).map(([k,v]) => `
+    <div class="photo-cat${k===activeCat?' active':''}" onclick="selectCat('${k}')">
+      <img class="photo-cat-img" src="${v.img}" alt="${v.name}" loading="lazy" onerror="this.style.display='none'">
       <div class="photo-cat-body">
         <div class="photo-cat-name">${v.name}</div>
-        <div class="photo-cat-cnt">${v.cnt} позицій</div>
+        <div class="photo-cat-cnt">${v.cnt}</div>
       </div>
     </div>`).join('');
   document.getElementById('photoCatsTitle').textContent = CAT_META[activeCat].name;
 }
 
-/* ============================================================
-   РЕНДЕР ФІЛЬТРІВ (порожній — будується динамічно)
-   ============================================================ */
-function renderFilters() {}
-
-function renderFilterTags(containerId, groupId, values, filterKey) {
-  const cont = document.getElementById(containerId);
-  const group = document.getElementById(groupId);
-  if (!values.length) { group.style.display = 'none'; return; }
-  group.style.display = '';
-  cont.innerHTML = values.map(v =>
-    `<span class="f-tag${filters[filterKey]===v?' act':''}" onclick="setFilter('${filterKey}','${v.replace(/'/g,"\\'")}')">${v}</span>`
-  ).join('');
-}
-
-function setFilter(key, val) {
-  filters[key] = filters[key] === val ? '' : val;
-  page = 1;
-  // Оновити вигляд тегів фільтра
-  document.querySelectorAll('.f-tag').forEach(t => {
-    t.classList.toggle('act', t.textContent === val && filters[key] === val);
-  });
-  renderTable();
-}
-
-
-function toggleFilter(id) {
-  document.getElementById(id).classList.toggle('open');
-}
-
-function resetFilters() {
-  filters = { diam:'', shelf:'', thick:'', wall:'', grade:'' };
-  page = 1;
-  renderFilters();
-  renderTable();
-}
-
-function applyFilters() {
-  page = 1;
-  renderTable();
-}
-
-/* ============================================================
-   РЕНДЕР ТАБЛИЦІ (з Google Sheets даних)
-   ============================================================ */
-function getFiltered() {
-  return currentRows.filter(r => {
-    // r = [category, name, col1, col2, col3, price, available]
-    const col1 = r[2] || '';
-    const col2 = r[3] || '';
-    const col3 = r[4] || '';
-    const all  = [col1,col2,col3].join('|').toLowerCase();
-    if (filters.diam  && col1 !== filters.diam)  return false;
-    if (filters.shelf && col1 !== filters.shelf)  return false;
-    if (filters.thick && col1 !== filters.thick)  return false;
-    if (filters.wall  && col2 !== filters.wall)   return false;
-    if (filters.grade && !all.includes(filters.grade.toLowerCase())) return false;
-    return true;
-  });
-}
-
-function renderTable() {
-  const meta   = CAT_META[activeCat];
-  const filtered = getFiltered();
-  const thead  = document.getElementById('tHead');
-  const tbody  = document.getElementById('tBody');
-  const empty  = document.getElementById('emptyState');
-  const pagEl  = document.getElementById('pag');
-
-  // Заголовки: беремо з першого рядка даних або ставимо дефолт
-  thead.innerHTML = `<tr>
-    <th>Параметр 1</th><th>Параметр 2</th><th>Марка / Тип</th>
-    <th>Ціна</th><th style="width:120px;"></th>
-  </tr>`;
-
-  if (!filtered.length) {
-    tbody.innerHTML = '';
-    empty.style.display = 'block';
-    pagEl.innerHTML = '';
-    return;
-  }
-  empty.style.display = 'none';
-
-  const pages = Math.ceil(filtered.length / PER);
-  if (page > pages) page = 1;
-  const slice = filtered.slice((page-1)*PER, page*PER);
-
-  tbody.innerHTML = slice.map(r => {
-    const col1  = r[2] || '—';
-    const col2  = r[3] || '—';
-    const col3  = r[4] || '—';
-    const price = r[5] || '';
-    const name  = r[1] || meta.name;
-    const prod  = `${name} ${col1} ${col2} ${col3}`.replace(/'/g,"\\'");
-    const priceDisplay = price ? `<span style="color:var(--bronze);font-weight:700;">${price}</span>` : `<span style="color:rgba(255,255,255,0.25);font-size:11px;">уточнюйте</span>`;
-    return `<tr>
-      <td>${col1}</td>
-      <td>${col2}</td>
-      <td><span class="td-badge">${col3}</span></td>
-      <td>${priceDisplay}</td>
-      <td><button class="order-btn" onclick="openModal('${prod}')"><i class="ti ti-shopping-cart"></i>Замовити</button></td>
-    </tr>`;
-  }).join('');
-
-  // Пагінація
-  if (pages <= 1) { pagEl.innerHTML = ''; return; }
-  let h = '';
-  if (page > 1) h += `<button class="p-btn" onclick="goPage(${page-1})"><i class="ti ti-chevron-left"></i></button>`;
-  for (let p = Math.max(1,page-2); p <= Math.min(pages,page+2); p++)
-    h += `<button class="p-btn${p===page?' act':''}" onclick="goPage(${p})">${p}</button>`;
-  if (page < pages) h += `<button class="p-btn" onclick="goPage(${page+1})"><i class="ti ti-chevron-right"></i></button>`;
-  h += `<span class="p-info">${(page-1)*PER+1}–${Math.min(page*PER,filtered.length)} з ${filtered.length}</span>`;
-  pagEl.innerHTML = h;
-}
-
-function goPage(p) {
-  page = p;
-  renderTable();
-  document.getElementById('shop').scrollIntoView({ behavior:'smooth', block:'start' });
-}
-
-/* ============================================================
-   НАВІГАЦІЯ
-   ============================================================ */
-function selectCatDirect(k) {
+/* ЗАВАНТАЖИТИ КАТЕГОРІЮ */
+async function selectCat(k) {
   activeCat = k;
   filters = { diam:'', shelf:'', thick:'', wall:'', grade:'' };
   page = 1;
   currentRows = [];
   renderPhotoCats();
-  loadCategory(k);
+
+  document.getElementById('tBody').innerHTML = `<tr><td colspan="5" style="text-align:center;padding:28px;color:var(--muted);">
+    <i class="ti ti-loader" style="font-size:22px;display:block;margin-bottom:8px;animation:spin 1s linear infinite;"></i>Завантаження...</td></tr>`;
+  document.getElementById('pag').innerHTML = '';
+
+  currentRows = await fetchSheet(k);
+  buildFilters();
+  renderTable();
 }
 
-function selectCat(k, e) {
-  e.preventDefault();
-  selectCatDirect(k);
-  document.getElementById('shop').scrollIntoView({ behavior:'smooth' });
+/* ФІЛЬТРИ */
+function buildFilters() {
+  const col1 = unique(currentRows.map(r => r[2])).sort(numSort);
+  const col2 = unique(currentRows.map(r => r[3]).filter(v => v && v !== '—')).sort(numSort);
+  const col3 = unique(currentRows.map(r => r[4]).filter(v => v && v !== '—')).sort();
+
+  setFilter('fg-diam',  'ft-diam',  col1,  'diam');
+  setFilter('fg-shelf', 'ft-shelf', col1,  'shelf');
+  setFilter('fg-thick', 'ft-thick', col1,  'thick');
+  setFilter('fg-wall',  'ft-wall',  col2,  'wall');
+  setFilter('fg-grade', 'ft-grade', col3.length ? col3 : col2, 'grade');
 }
 
-/* Анімація спінера */
-const style = document.createElement('style');
-style.textContent = '@keyframes spin { to { transform: rotate(360deg); } }';
-document.head.appendChild(style);
+function unique(arr) { return [...new Set(arr.filter(Boolean))]; }
+function numSort(a,b) { return parseFloat(a) - parseFloat(b) || a.localeCompare(b); }
 
+function setFilter(groupId, tagId, vals, key) {
+  const g = document.getElementById(groupId);
+  const t = document.getElementById(tagId);
+  if (!g || !t) return;
+  if (!vals.length) { g.style.display='none'; return; }
+  g.style.display='';
+  t.innerHTML = vals.map(v =>
+    `<span class="f-tag${filters[key]===v?' act':''}" onclick="applyFilter('${key}','${v.replace(/'/g,"\\'")}')">${v}</span>`
+  ).join('');
+}
 
-/* ============================================================
-   MODAL
-   ============================================================ */
-function openModal(prod) {
-  document.getElementById('mProd').textContent = prod;
-  document.getElementById('mProdInput').value  = prod;
-  document.getElementById('mFormWrap').style.display = 'block';
-  document.getElementById('mOk').style.display = 'none';
+function applyFilter(key, val) {
+  filters[key] = filters[key] === val ? '' : val;
+  page = 1;
+  buildFilters();
+  renderTable();
+}
+
+function toggleFilter(id) { document.getElementById(id).classList.toggle('open'); }
+
+function resetFilters() {
+  filters = { diam:'', shelf:'', thick:'', wall:'', grade:'' };
+  page = 1;
+  buildFilters();
+  renderTable();
+}
+
+function applyFilters() { page=1; renderTable(); }
+
+/* ТАБЛИЦЯ */
+function getFiltered() {
+  return currentRows.filter(r => {
+    if (filters.diam  && r[2] !== filters.diam)  return false;
+    if (filters.shelf && r[2] !== filters.shelf)  return false;
+    if (filters.thick && r[2] !== filters.thick)  return false;
+    if (filters.wall  && r[3] !== filters.wall)   return false;
+    if (filters.grade && r[4] !== filters.grade && r[3] !== filters.grade) return false;
+    return true;
+  });
+}
+
+function renderTable() {
+  const filtered = getFiltered();
+  const thead = document.getElementById('tHead');
+  const tbody = document.getElementById('tBody');
+  const empty = document.getElementById('emptyState');
+  const pagEl = document.getElementById('pag');
+
+  thead.innerHTML = `<tr>
+    <th>Параметр 1</th><th>Параметр 2</th><th>Марка / Тип</th>
+    <th>Ціна</th><th style="width:110px;"></th>
+  </tr>`;
+
+  if (!filtered.length) {
+    tbody.innerHTML=''; empty.style.display='block'; pagEl.innerHTML=''; return;
+  }
+  empty.style.display='none';
+
+  const pages = Math.ceil(filtered.length/PER);
+  if (page>pages) page=1;
+  const slice = filtered.slice((page-1)*PER, page*PER);
+
+  tbody.innerHTML = slice.map(r => {
+    const [,name,c1,c2,c3,price] = r;
+    const priceHtml = price
+      ? `<span style="color:var(--bronze);font-weight:700;">${price}</span>`
+      : `<span style="color:rgba(255,255,255,0.28);font-size:11px;">уточнюйте</span>`;
+    const prod = `${name||CAT_META[activeCat].name} ${c1} ${c2} ${c3}`.replace(/'/g,"\\'");
+    return `<tr>
+      <td>${c1||'—'}</td>
+      <td>${c2||'—'}</td>
+      <td><span class="td-badge">${c3||'—'}</span></td>
+      <td>${priceHtml}</td>
+      <td><button class="order-btn" onclick="openModal('${prod}')"><i class="ti ti-shopping-cart"></i>Замовити</button></td>
+    </tr>`;
+  }).join('');
+
+  if (pages<=1){pagEl.innerHTML='';return;}
+  let h='';
+  if(page>1) h+=`<button class="p-btn" onclick="goPage(${page-1})"><i class="ti ti-chevron-left"></i></button>`;
+  for(let p=Math.max(1,page-2);p<=Math.min(pages,page+2);p++)
+    h+=`<button class="p-btn${p===page?' act':''}" onclick="goPage(${p})">${p}</button>`;
+  if(page<pages) h+=`<button class="p-btn" onclick="goPage(${page+1})"><i class="ti ti-chevron-right"></i></button>`;
+  h+=`<span class="p-info">${(page-1)*PER+1}–${Math.min(page*PER,filtered.length)} з ${filtered.length}</span>`;
+  pagEl.innerHTML=h;
+}
+
+function goPage(p) {
+  page=p; renderTable();
+  document.querySelector('.shop-wrap').scrollIntoView({behavior:'smooth'});
+}
+
+/* MODAL */
+function openModal(prod){
+  document.getElementById('mProd').textContent=prod;
+  document.getElementById('mProdInput').value=prod;
+  document.getElementById('mFormWrap').style.display='block';
+  document.getElementById('mOk').style.display='none';
   document.getElementById('mForm').reset();
-  document.getElementById('mProdInput').value = prod;
+  document.getElementById('mProdInput').value=prod;
   document.getElementById('modalBg').classList.add('open');
 }
-function closeModal() { document.getElementById('modalBg').classList.remove('open'); }
-document.getElementById('modalBg').addEventListener('click', e => { if(e.target===e.currentTarget) closeModal(); });
-
-async function submitModal(e) {
+function closeModal(){document.getElementById('modalBg').classList.remove('open');}
+document.getElementById('modalBg').addEventListener('click',e=>{if(e.target===e.currentTarget)closeModal();});
+async function submitModal(e){
   e.preventDefault();
-  const btn = e.target.querySelector('.m-submit');
-  btn.style.opacity = '.6'; btn.querySelector('span').textContent = 'Відправляємо...';
-  try {
-    const res = await fetch('https://formspree.io/f/maewngzz', {
-      method:'POST', body:new FormData(e.target), headers:{'Accept':'application/json'}
-    });
-    if (res.ok) {
-      document.getElementById('mFormWrap').style.display = 'none';
-      document.getElementById('mOk').style.display = 'block';
-      setTimeout(closeModal, 3000);
-    } else { btn.querySelector('span').textContent = 'Помилка. Спробуйте ще раз'; btn.style.opacity = '1'; }
-  } catch { btn.querySelector('span').textContent = 'Помилка. Спробуйте ще раз'; btn.style.opacity = '1'; }
+  const btn=e.target.querySelector('.m-submit');
+  btn.style.opacity='.6'; btn.querySelector('span').textContent='Відправляємо...';
+  try{
+    const res=await fetch('https://formspree.io/f/maewngzz',{method:'POST',body:new FormData(e.target),headers:{'Accept':'application/json'}});
+    if(res.ok){document.getElementById('mFormWrap').style.display='none';document.getElementById('mOk').style.display='block';setTimeout(closeModal,3000);}
+    else{btn.querySelector('span').textContent='Помилка. Спробуйте ще раз';btn.style.opacity='1';}
+  }catch{btn.querySelector('span').textContent='Помилка. Спробуйте ще раз';btn.style.opacity='1';}
 }
 
 /* СТАРТ */
 renderPhotoCats();
-loadCategory('pipe');
+selectCat('pipe');
 </script>
 </body>
 </html>
