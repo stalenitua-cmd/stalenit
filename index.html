@@ -2,1653 +2,454 @@
 <html lang="uk">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Сталеніт — Металопрокат в Україні</title>
-<meta name="description" content="Постачальник чорного, нержавіючого та кольорового металопрокату. 5000+ позицій в наявності. Доставка по всій Україні. Платник ПДВ.">
-
-<!-- Шрифти -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;600;700;800;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css">
-
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1">
+<meta name="theme-color" content="#0a0e1a">
+<title>Калькулятор металу — Сталеніт</title>
+<link rel="manifest" href="manifest.json">
+<link rel="apple-touch-icon" href="icon-192.png">
+<link rel="icon" href="icon-192.png">
 <style>
-/* ============================================================
-   ТОКЕНИ
-   ============================================================ */
-:root {
-  --night:   #0a0e1a;
-  --deep:    #0f1420;
-  --blue:    #1a467f;
-  --blue2:   #2558a0;
-  --bronze:  #c8a96e;
-  --bronze2: #a07840;
-  --steel:   #4a5a6e;
-  --muted:   #8fa3b8;
-  --white:   #ffffff;
-  --surface: rgba(255,255,255,0.04);
-  --border:  rgba(255,255,255,0.08);
-  --radius:  12px;
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+:root{
+  --bg:#0a0e1a;
+  --surface:#111826;
+  --surface2:#161e30;
+  --border:#232d42;
+  --accent:#1a467f;
+  --accent2:#2c5d9e;
+  --gold:#c8a96e;
+  --gold2:#e0c68f;
+  --text:#f2f4f8;
+  --text2:#aab3c5;
+  --muted:#6b7690;
+  --danger:#e0665e;
+}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{height:100%}
+body{
+  background:var(--bg);color:var(--text);
+  font-family:'Inter',sans-serif;font-size:14px;
+  min-height:100vh;overflow-x:hidden;
+}
+h1,h2,h3,.disp{font-family:'Barlow Condensed',sans-serif;font-weight:700;letter-spacing:.01em}
+
+/* HEADER */
+header{
+  background:var(--surface);border-bottom:1px solid var(--border);
+  padding:14px 20px;display:flex;align-items:center;gap:12px;
+  position:sticky;top:0;z-index:50;
+}
+.logo-mark{
+  width:36px;height:36px;border-radius:9px;
+  background:linear-gradient(135deg,var(--accent),var(--accent2));
+  display:flex;align-items:center;justify-content:center;flex-shrink:0;
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:19px;color:var(--gold2);
+}
+.htext{line-height:1.2}
+.htext .t1{font-family:'Barlow Condensed',sans-serif;font-size:19px;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
+.htext .t2{font-size:10.5px;color:var(--gold);text-transform:uppercase;letter-spacing:.1em;margin-top:1px}
+
+/* LAYOUT */
+.wrap{display:flex;min-height:calc(100vh - 65px)}
+.sidebar{
+  width:230px;flex-shrink:0;background:var(--surface);
+  border-right:1px solid var(--border);padding:18px 14px;
+  display:flex;flex-direction:column;gap:20px;
+}
+.sec-label{
+  font-size:10px;text-transform:uppercase;letter-spacing:.12em;color:var(--muted);
+  font-weight:700;margin-bottom:9px;padding:0 4px;
+}
+.chip-list{display:flex;flex-direction:column;gap:3px}
+.chip{
+  background:transparent;border:none;color:var(--text2);
+  padding:9px 12px;border-radius:8px;text-align:left;
+  font-size:13.5px;font-family:inherit;cursor:pointer;
+  transition:all .15s;display:flex;align-items:center;justify-content:space-between;
+}
+.chip:hover{background:var(--surface2);color:var(--text)}
+.chip.active{background:var(--accent);color:#fff;font-weight:600}
+.chip .dot{width:7px;height:7px;border-radius:50%;background:var(--gold);opacity:0;transition:opacity .15s}
+.chip.active .dot{opacity:1}
+
+.main{flex:1;padding:26px 30px 100px;max-width:760px}
+.profile-title{font-size:26px;margin-bottom:3px}
+.profile-sub{font-size:12.5px;color:var(--muted);margin-bottom:22px}
+.approx-note{
+  display:inline-flex;align-items:center;gap:6px;background:rgba(200,169,110,.1);
+  border:1px solid rgba(200,169,110,.3);color:var(--gold);
+  font-size:11.5px;padding:5px 11px;border-radius:7px;margin-bottom:18px;
 }
 
-/* ============================================================
-   RESET + BASE
-   ============================================================ */
-*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  font-family: 'Inter', sans-serif;
-  background: var(--night);
-  color: var(--white);
-  overflow-x: hidden;
-  -webkit-font-smoothing: antialiased;
+.diagram-wrap{
+  background:var(--surface);border:1px solid var(--border);border-radius:14px;
+  padding:20px;margin-bottom:22px;display:flex;align-items:center;justify-content:center;
+  min-height:180px;
 }
-a { text-decoration: none; color: inherit; }
-img { display: block; max-width: 100%; }
+.diagram-wrap svg{max-width:100%;height:auto}
 
-/* ТИПОГРАФІКА */
-.display {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-weight: 900;
-  line-height: 1.0;
-  letter-spacing: -0.01em;
-  text-transform: uppercase;
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px 16px;margin-bottom:8px}
+.field{display:flex;flex-direction:column;gap:6px}
+.field.full{grid-column:1/-1}
+.field label{font-size:11px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);font-weight:600}
+.field .input-row{position:relative}
+.field input{
+  width:100%;background:var(--surface2);border:1px solid var(--border);
+  border-radius:9px;padding:11px 40px 11px 13px;font-size:15px;color:var(--text);
+  font-family:inherit;outline:none;transition:border-color .15s;
 }
-.label-text {
-  font-size: 11px;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--bronze);
+.field input:focus{border-color:var(--accent2)}
+.field .unit{
+  position:absolute;right:13px;top:50%;transform:translateY(-50%);
+  font-size:12px;color:var(--muted);pointer-events:none;
 }
 
-/* БІГУЧИЙ РЯДОК — прибрано */
-.ticker-wrap { display: none; }
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.7);
-  padding: 0 28px;
-  border-right: 1px solid rgba(255,255,255,0.2);
-  white-space: nowrap;
+/* RESULT BAR */
+.result-bar{
+  position:fixed;bottom:0;left:230px;right:0;
+  background:var(--surface);border-top:1px solid var(--border);
+  padding:16px 30px;display:flex;align-items:center;justify-content:space-between;
+  z-index:40;
 }
-.ticker-item.accent { color: var(--bronze); }
-@keyframes ticker {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
+.result-label{font-size:11.5px;text-transform:uppercase;letter-spacing:.1em;color:var(--muted);font-weight:600}
+.result-value{
+  font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:38px;color:var(--gold2);
+  line-height:1;display:flex;align-items:baseline;gap:8px;
+}
+.result-value .unit{font-size:16px;color:var(--gold);font-weight:600;font-family:'Inter',sans-serif}
+.result-meta{font-size:11.5px;color:var(--muted);margin-top:3px}
+
+/* MOBILE */
+.mobile-tabs{display:none}
+@media(max-width:860px){
+  .sidebar{display:none}
+  .mobile-tabs{
+    display:flex;gap:8px;overflow-x:auto;padding:12px 16px;
+    background:var(--surface);border-bottom:1px solid var(--border);
+    -webkit-overflow-scrolling:touch;
+  }
+  .mobile-tabs::-webkit-scrollbar{display:none}
+  .mtab{
+    flex-shrink:0;background:var(--surface2);border:1px solid var(--border);color:var(--text2);
+    padding:8px 14px;border-radius:20px;font-size:12.5px;font-family:inherit;cursor:pointer;white-space:nowrap;
+  }
+  .mtab.active{background:var(--accent);color:#fff;border-color:var(--accent)}
+  .main{padding:20px 16px 110px;max-width:100%}
+  .form-grid{grid-template-columns:1fr 1fr}
+  .result-bar{left:0;padding:14px 16px}
+  .result-value{font-size:30px}
+}
+@media(max-width:420px){
+  .form-grid{grid-template-columns:1fr}
 }
 
-/* SCROLL REVEAL */
-.reveal {
-  opacity: 0;
-  transform: translateY(28px);
-  transition: opacity 0.7s ease, transform 0.7s ease;
-}
-.reveal.visible { opacity: 1; transform: translateY(0); }
-
-/* ============================================================
-   NAVBAR
-   ============================================================ */
-.nav {
-  position: fixed;
-  top: 0; left: 0; right: 0;
-  z-index: 1000;
-  height: 68px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 48px;
-  background: rgba(10,14,26,0.20);
-  backdrop-filter: blur(4px);
-  transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s;
-  border-bottom: 1px solid rgba(255,255,255,0.06);
-}
-.nav.scrolled {
-  background: rgba(10,14,26,0.94);
-  backdrop-filter: blur(16px);
-  border-color: var(--border);
-}
-.nav-logo {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 26px;
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--white);
-}
-.nav-logo span { color: var(--bronze); }
-/* ============================================================
-   NAVBAR — LIQUID METAL СТИЛЬ
-   ============================================================ */
-.nav-logo img {
-  height: 38px;
-  display: block;
-  filter: drop-shadow(0 0 8px rgba(91,155,213,0.4));
-  transition: filter 0.3s;
-}
-.nav-logo:hover img {
-  filter: drop-shadow(0 0 14px rgba(91,155,213,0.7));
-}
-.nav-links {
-  display: flex;
-  gap: 4px;
-  list-style: none;
-  position: absolute;
-  left: 50%; transform: translateX(-50%);
-}
-.nav-links a {
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(255,255,255,0.75);
-  transition: all 0.2s;
-  white-space: nowrap;
-  padding: 6px 14px;
-  border-radius: 100px;
-  position: relative;
-}
-.nav-links a::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 100px;
-  background: linear-gradient(135deg, rgba(26,70,127,0) 0%, rgba(91,155,213,0.15) 50%, rgba(26,70,127,0) 100%);
-  opacity: 0;
-  transition: opacity 0.2s;
-}
-.nav-links a:hover {
-  color: var(--white);
-}
-.nav-links a:hover::after { opacity: 1; }
-.nav-right {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-.nav-contacts {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  gap: 2px;
-}
-.nav-phone {
-  font-size: 14px;
-  font-weight: 700;
-  color: var(--white);
-  transition: color 0.2s;
-}
-.nav-phone:hover { color: var(--bronze); }
-.nav-email {
-  font-size: 11px;
-  color: var(--muted);
-  transition: color 0.2s;
-}
-.nav-email:hover { color: var(--white); }
-/* ============================================================
-   LIQUID METAL КНОПКИ
-   ============================================================ */
-
-/* Базова кнопка */
-.lm-btn {
-  position: relative;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 0 22px;
-  height: 46px;
-  border: none;
-  border-radius: 100px;
-  font-family: 'Inter', sans-serif;
-  font-size: 14px;
-  font-weight: 500;
-  cursor: pointer;
-  overflow: hidden;
-  outline: none;
-  text-decoration: none;
-  white-space: nowrap;
-  transition: transform 0.15s ease, box-shadow 0.15s ease;
-  /* Рідкий метал — синій варіант */
-  background: linear-gradient(135deg,
-    #1a3a6e 0%,
-    #1a467f 20%,
-    #2a6abf 40%,
-    #1a467f 60%,
-    #0d2d5e 80%,
-    #1a467f 100%
-  );
-  background-size: 300% 300%;
-  animation: liquidShift 4s ease infinite;
-  box-shadow:
-    0 0 0 1px rgba(0,0,0,0.4),
-    0 9px 9px rgba(0,0,0,0.12),
-    0 4px 4px rgba(0,0,0,0.15),
-    0 2px 5px rgba(0,0,0,0.2),
-    inset 0 1px 0 rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.85);
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-  -webkit-font-smoothing: antialiased;
-}
-.lm-btn::before {
-  content: '';
-  position: absolute;
-  inset: 2px;
-  border-radius: 100px;
-  background: linear-gradient(180deg, #1e2a4a 0%, #0d1a35 100%);
-  z-index: 0;
-  transition: opacity 0.2s;
-}
-.lm-btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 100px;
-  background: linear-gradient(135deg,
-    transparent 0%,
-    rgba(91,155,213,0.3) 30%,
-    rgba(200,169,110,0.2) 50%,
-    rgba(91,155,213,0.2) 70%,
-    transparent 100%
-  );
-  background-size: 300% 300%;
-  animation: liquidShimmer 3s ease infinite;
-  z-index: 1;
-}
-.lm-btn span, .lm-btn i {
-  position: relative;
-  z-index: 2;
-  color: rgba(255,255,255,0.85);
-}
-.lm-btn:hover {
-  transform: translateY(-2px);
-  box-shadow:
-    0 0 0 1px rgba(0,0,0,0.4),
-    0 12px 6px rgba(0,0,0,0.05),
-    0 8px 5px rgba(0,0,0,0.1),
-    0 4px 4px rgba(0,0,0,0.15),
-    0 1px 2px rgba(0,0,0,0.2),
-    inset 0 1px 0 rgba(255,255,255,0.2);
-  animation-play-state: running;
-}
-.lm-btn:hover::before { opacity: 0.85; }
-.lm-btn:active {
-  transform: translateY(1px) scale(0.98);
-  box-shadow:
-    0 0 0 1px rgba(0,0,0,0.5),
-    0 1px 2px rgba(0,0,0,0.3),
-    inset 0 2px 4px rgba(0,0,0,0.4);
-}
-
-/* Бронзовий варіант — тепер такий самий як синій */
-.lm-btn-bronze {
-  background: linear-gradient(135deg,
-    #1a3a6e 0%,
-    #1a467f 20%,
-    #2a6abf 40%,
-    #1a467f 60%,
-    #0d2d5e 80%,
-    #1a467f 100%
-  );
-  background-size: 300% 300%;
-  color: rgba(255,255,255,0.85);
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-  box-shadow:
-    0 0 0 1px rgba(0,0,0,0.4),
-    0 9px 9px rgba(0,0,0,0.12),
-    0 4px 4px rgba(0,0,0,0.15),
-    inset 0 1px 0 rgba(255,255,255,0.15);
-}
-.lm-btn-bronze::before {
-  background: linear-gradient(180deg, #1e2a4a 0%, #0d1a35 100%);
-}
-.lm-btn-bronze::after {
-  background: linear-gradient(135deg,
-    transparent 0%,
-    rgba(91,155,213,0.3) 30%,
-    rgba(200,169,110,0.2) 50%,
-    rgba(91,155,213,0.2) 70%,
-    transparent 100%
-  );
-  background-size: 300% 300%;
-  animation: liquidShimmer 3s ease infinite;
-}
-.lm-btn-bronze span, .lm-btn-bronze i { color: rgba(255,255,255,0.85); }
-
-/* Прозорий варіант (outline) */
-.lm-btn-ghost {
-  background: rgba(255,255,255,0.06);
-  background-size: 300% 300%;
-  animation: none;
-  box-shadow:
-    0 0 0 1px rgba(255,255,255,0.15),
-    inset 0 1px 0 rgba(255,255,255,0.1);
-}
-.lm-btn-ghost::before { background: rgba(255,255,255,0.04); }
-.lm-btn-ghost::after { animation: none; opacity: 0; }
-.lm-btn-ghost:hover {
-  background: rgba(26,70,127,0.25);
-  box-shadow: 0 0 0 1px rgba(91,155,213,0.4), inset 0 1px 0 rgba(255,255,255,0.15);
-}
-
-/* Ripple ефект */
-.lm-ripple {
-  position: absolute;
-  width: 20px; height: 20px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0) 70%);
-  transform: translate(-50%,-50%) scale(0);
-  animation: ripple 0.6s ease-out forwards;
-  pointer-events: none;
-  z-index: 3;
-}
-
-/* Анімації */
-@keyframes liquidShift {
-  0%   { background-position: 0% 50%; }
-  50%  { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-@keyframes liquidShimmer {
-  0%   { background-position: 200% 0%; opacity: 0.6; }
-  50%  { background-position: 0% 100%; opacity: 1; }
-  100% { background-position: 200% 0%; opacity: 0.6; }
-}
-@keyframes successPop {
-  0%   { transform: scale(0); opacity: 0; }
-  60%  { transform: scale(1.15); opacity: 1; }
-  100% { transform: scale(1); opacity: 1; }
-}
-
-/* NAV КНОПКА */
-.nav-btn {
-  display: flex;
-  align-items: center;
-  gap: 7px;
-  padding: 0 18px;
-  height: 38px;
-  border: none;
-  border-radius: 100px;
-  font-family: 'Inter', sans-serif;
-  font-size: 13px;
-  font-weight: 600;
-  cursor: pointer;
-  white-space: nowrap;
-  text-decoration: none;
-  position: relative;
-  overflow: hidden;
-  background: linear-gradient(135deg, #1a3a6e 0%, #1a467f 30%, #2a6abf 60%, #1a467f 100%);
-  background-size: 300% 300%;
-  animation: liquidShift 4s ease infinite;
-  box-shadow: 0 0 0 1px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.15);
-  color: rgba(255,255,255,0.9);
-  transition: transform 0.15s, box-shadow 0.15s;
-}
-.nav-btn::before {
-  content: '';
-  position: absolute;
-  inset: 2px;
-  border-radius: 100px;
-  background: linear-gradient(180deg, #1e2a4a 0%, #0d1a35 100%);
-  z-index: 0;
-}
-.nav-btn::after {
-  content: '';
-  position: absolute;
-  inset: 0;
-  border-radius: 100px;
-  background: linear-gradient(135deg, transparent 0%, rgba(91,155,213,0.25) 50%, transparent 100%);
-  background-size: 300% 300%;
-  animation: liquidShimmer 3s ease infinite;
-  z-index: 1;
-}
-.nav-btn i, .nav-btn span { position: relative; z-index: 2; color: rgba(255,255,255,0.9); }
-.nav-btn:hover { transform: translateY(-1px); box-shadow: 0 0 0 1px rgba(0,0,0,0.3), 0 4px 12px rgba(26,70,127,0.4), inset 0 1px 0 rgba(255,255,255,0.2); }
-
-/* ============================================================
-   HERO
-   ============================================================ */
-.hero {
-  position: relative;
-  width: 100%;
-  height: 100vh;
-  min-height: 640px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  overflow: hidden;
-}
-.hero-video {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  object-position: center;
-  z-index: 0;
-}
-.hero-fade {
-  position: absolute; inset: 0;
-  background: var(--night);
-  z-index: 1;
-  opacity: 0;
-  transition: opacity 0.8s ease;
-  pointer-events: none;
-}
-.hero-fade.active { opacity: 1; }
-.hero-overlay {
-  position: absolute; inset: 0;
-  z-index: 2;
-  background: linear-gradient(
-    to bottom,
-    rgba(10,14,26,0.65) 0%,
-    rgba(10,14,26,0.25) 35%,
-    rgba(10,14,26,0.5) 70%,
-    rgba(10,14,26,0.92) 100%
-  );
-}
-.hero-content {
-  position: relative;
-  z-index: 3;
-  text-align: center;
-  padding: 0 24px;
-  max-width: 960px;
-}
-.hero-eyebrow {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: 24px;
-}
-.hero-eyebrow::before, .hero-eyebrow::after {
-  content: '';
-  display: block;
-  width: 36px; height: 1px;
-  background: var(--bronze);
-}
-.hero-title {
-  font-size: clamp(32px, 4.5vw, 56px);
-  margin-bottom: 20px;
-  color: var(--white);
-  text-shadow: 0 2px 16px rgba(0,0,0,0.5);
-  line-height: 1.1;
-}
-.hero-title em {
-  font-style: normal;
-  color: var(--bronze);
-}
-.hero-sub {
-  font-size: clamp(15px, 1.8vw, 18px);
-  color: rgba(255,255,255,0.65);
-  line-height: 1.65;
-  max-width: 560px;
-  margin: 0 auto 40px;
-}
-/* hero-btn і about-btn — замінені на lm-btn */
-.scroll-line {
-  position: absolute;
-  bottom: 32px; left: 50%;
-  transform: translateX(-50%);
-  z-index: 3;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 8px;
-}
-.scroll-line span {
-  font-size: 10px;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,0.35);
-}
-.scroll-line-bar {
-  width: 1px; height: 48px;
-  background: linear-gradient(to bottom, var(--bronze), transparent);
-  animation: scrollBar 1.8s ease-in-out infinite;
-}
-@keyframes scrollBar {
-  0% { transform: scaleY(0); transform-origin: top; opacity: 1; }
-  50% { transform: scaleY(1); transform-origin: top; opacity: 1; }
-  100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
-}
-
-/* fade-in анімація для hero елементів */
-.hero-eyebrow, .hero-title, .hero-sub, .hero-btn {
-  opacity: 0;
-  animation: heroFadeUp 0.8s ease forwards;
-}
-.hero-eyebrow { animation-delay: 0.3s; }
-.hero-title   { animation-delay: 0.5s; }
-.hero-sub     { animation-delay: 0.7s; }
-.hero-btn     { animation-delay: 0.9s; }
-@keyframes heroFadeUp {
-  from { opacity: 0; transform: translateY(20px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-/* ============================================================
-   СПІЛЬНІ СТИЛІ СЕКЦІЙ
-   ============================================================ */
-.section { width: 100%; padding: 80px 24px; min-height: 100vh; display: flex; flex-direction: column; justify-content: center; }
-.section-inner { max-width: 1200px; margin: 0 auto; width: 100%; }
-.section-header { text-align: center; margin-bottom: 56px; }
-.section-title {
-  font-size: clamp(28px, 4vw, 48px);
-  margin-top: 10px;
-  margin-bottom: 14px;
-  color: var(--white);
-}
-.section-sub { font-size: 16px; color: var(--muted); }
-
-/* ============================================================
-   ПЕРЕВАГИ
-   ============================================================ */
-.adv-section { background: var(--deep); }
-.adv-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2px;
-  background: var(--border);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  overflow: hidden;
-}
-@media (max-width: 900px) { .adv-grid { grid-template-columns: repeat(2,1fr); } }
-@media (max-width: 560px) { .adv-grid { grid-template-columns: 1fr; } }
-
-.adv-card {
-  background: var(--deep);
-  padding: 36px 28px;
-  transition: background 0.2s;
-}
-.adv-card:hover { background: rgba(26,70,127,0.12); }
-.adv-num {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: 13px;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: var(--bronze);
-  margin-bottom: 20px;
-}
-.adv-icon {
-  width: 44px; height: 44px;
-  border-radius: 10px;
-  background: rgba(26,70,127,0.25);
-  border: 1px solid rgba(26,70,127,0.4);
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 18px;
-}
-.adv-icon i { font-size: 22px; color: #7ab8ff; }
-.adv-title {
-  font-size: 17px;
-  font-weight: 700;
-  color: var(--white);
-  margin-bottom: 10px;
-}
-.adv-desc { font-size: 14px; color: var(--muted); line-height: 1.7; }
-
-/* ============================================================
-   ПОСЛУГИ
-   ============================================================ */
-.srv-section {
-  position: relative;
-  overflow: hidden;
-  padding: 0;
-}
-.srv-video {
-  position: absolute; inset: 0;
-  width: 100%; height: 100%;
-  object-fit: cover;
-  z-index: 0;
-}
-.srv-fade {
-  position: absolute; inset: 0;
-  background: var(--night);
-  z-index: 1; opacity: 0;
-  transition: opacity 0.8s;
-  pointer-events: none;
-}
-.srv-fade.active { opacity: 1; }
-.srv-overlay {
-  position: absolute; inset: 0;
-  z-index: 2;
-  background: rgba(4,7,18,0.62);
-}
-.srv-inner {
-  position: relative;
-  z-index: 3;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 48px 24px;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-}
-.srv-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-  margin-top: 32px;
-}
-@media (max-width: 900px) { .srv-grid { grid-template-columns: repeat(2,1fr); } }
-@media (max-width: 560px) { .srv-grid { grid-template-columns: 1fr; } }
-
-.srv-card {
-  background: rgba(255,255,255,0.05);
-  border: 1px solid rgba(255,255,255,0.1);
-  border-radius: var(--radius);
-  padding: 18px 18px;
-  transition: background 0.25s, border-color 0.25s, transform 0.25s;
-  backdrop-filter: blur(6px);
-}
-.srv-card:hover {
-  background: rgba(26,70,127,0.22);
-  border-color: rgba(91,155,213,0.35);
-  transform: translateY(-3px);
-}
-.srv-card.wide {
-  grid-column: span 2;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-  align-items: center;
-}
-@media (max-width: 560px) { .srv-card.wide { grid-column: span 1; grid-template-columns: 1fr; } }
-
-.srv-icon {
-  width: 40px; height: 40px;
-  border-radius: 10px;
-  background: rgba(26,70,127,0.6);
-  border: 1px solid rgba(91,155,213,0.35);
-  display: flex; align-items: center; justify-content: center;
-  margin-bottom: 10px;
-}
-.srv-icon i { font-size: 19px; color: #7ab8ff; }
-.srv-divider { width: 24px; height: 2px; background: var(--blue); border-radius: 2px; margin-bottom: 10px; }
-.srv-name { font-size: 15px; font-weight: 800; color: var(--white); margin-bottom: 6px; }
-.srv-desc { font-size: 13px; color: var(--white); line-height: 1.55; }
-.srv-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-bottom: 8px; }
-.srv-tag {
-  padding: 3px 10px;
-  background: rgba(26,70,127,0.5);
-  border: 1px solid rgba(91,155,213,0.3);
-  border-radius: 20px;
-  font-size: 11px; font-weight: 700;
-  color: #a8d0f8;
-}
-.srv-info-col { display: flex; flex-direction: column; gap: 7px; }
-.srv-info-row {
-  display: flex; align-items: center; gap: 10px;
-  padding: 8px 12px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.07);
-  border-radius: 8px;
-}
-.srv-info-row i { font-size: 15px; color: #5b9bd5; flex-shrink: 0; }
-.srv-info-row span { font-size: 12px; color: var(--white); }
-
-/* ============================================================
-   ПРОДУКЦІЯ
-   ============================================================ */
-.prod-section {
-  background: var(--night);
-  width: 100%;
-  height: 100vh;
-  min-height: 640px;
-  position: relative;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-}
-.prod-ui {
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  z-index: 10;
-  padding: 40px 24px 0;
-  text-align: center;
-}
-.prod-header { margin-bottom: 16px; }
-.prod-tabs {
-  display: flex;
-  justify-content: center;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-.prod-tab {
-  padding: 9px 22px;
-  background: rgba(255,255,255,0.08);
-  border: 1px solid rgba(255,255,255,0.15);
-  border-radius: 24px;
-  font-size: 13px; font-weight: 600;
-  color: var(--muted);
-  cursor: pointer;
-  transition: all 0.2s;
-  backdrop-filter: blur(6px);
-}
-.prod-tab:hover { border-color: var(--blue); color: var(--white); }
-.prod-tab.active { background: var(--blue); border-color: var(--blue); color: var(--white); }
-
-.prod-panel { display: none; position: absolute; inset: 0; }
-.prod-panel.active { display: block; }
-
-/* зображення на весь екран */
-.prod-bg {
-  position: absolute; inset: -5%;
-  width: 110%; height: 110%;
-  background-size: cover;
-  background-position: center;
-  animation: kenBurns 18s ease-in-out infinite alternate;
-  will-change: transform;
-}
-.prod-overlay {
-  position: absolute; inset: 0;
-  background: linear-gradient(
-    to bottom,
-    rgba(10,14,26,0.6) 0%,
-    rgba(10,14,26,0.2) 35%,
-    rgba(10,14,26,0.55) 70%,
-    rgba(10,14,26,0.92) 100%
-  );
-  z-index: 1;
-}
-
-/* нижній підпис на зображенні */
-.prod-caption {
-  position: absolute; bottom: 0; left: 0; right: 0;
-  z-index: 2; padding: 32px 40px;
-  display: flex; align-items: flex-end; justify-content: space-between;
-  flex-wrap: wrap; gap: 20px;
-}
-.prod-caption-left {}
-.prod-caption-title { font-size: 24px; font-weight: 800; color: #fff; margin-bottom: 8px; text-shadow: 0 2px 12px rgba(0,0,0,0.5); }
-.prod-caption-tags { display: flex; flex-wrap: wrap; gap: 6px; }
-.prod-ctag {
-  padding: 5px 14px;
-  background: rgba(255,255,255,0.1);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 20px;
-  font-size: 12px; font-weight: 600;
-  color: rgba(255,255,255,0.85);
-  backdrop-filter: blur(4px);
-}
-.prod-ctag.accent { background: rgba(26,70,127,0.5); border-color: rgba(91,155,213,0.4); color: #a8d0f8; }
-.prod-caption-list { font-size: 13px; color: rgba(255,255,255,0.55); margin-top: 8px; }
-
-@keyframes kenBurns {
-  0%   { transform: scale(1) translate(0,0); }
-  50%  { transform: scale(1.04) translate(-1%,1%); }
-  100% { transform: scale(1.02) translate(1%,-1%); }
-}
-  margin-bottom: 12px;
-}
-.pb-icon i { font-size: 17px; color: #a8d0f8; }
-.pb-name  { font-size: 14px; font-weight: 800; color: var(--white); margin-bottom: 5px; }
-.pb-grades{ font-size: 11px; color: rgba(255,255,255,0.4); line-height: 1.6; margin-bottom: 6px; }
-.pb-items { font-size: 11px; color: rgba(255,255,255,0.28); line-height: 1.5; }
-
-/* ============================================================
-   ПРО КОМПАНІЮ
-   ============================================================ */
-.about-section { background: #f5f7fa; padding: 80px 24px; min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; }
-.about-inner {
-  max-width: 1200px; margin: 0 auto;
-  display: grid; grid-template-columns: 1fr 1fr;
-  gap: 80px; align-items: center;
-}
-@media (max-width: 900px) { .about-inner { grid-template-columns: 1fr; gap: 48px; } }
-
-.about-eyebrow {
-  display: flex; align-items: center; gap: 10px;
-  margin-bottom: 14px;
-}
-.about-eyebrow::before { content: ''; display: block; width: 28px; height: 2px; background: var(--blue); }
-.about-title {
-  font-family: 'Barlow Condensed', sans-serif;
-  font-size: clamp(32px, 4vw, 52px);
-  font-weight: 900;
-  text-transform: uppercase;
-  color: #0d1117;
-  line-height: 1.05;
-  margin-bottom: 24px;
-}
-.about-title span { color: var(--blue); }
-.about-text { font-size: 15px; color: #444; line-height: 1.8; margin-bottom: 16px; }
-.about-text strong { color: #1a1a1a; }
-/* about-btn замінено на lm-btn-bronze */
-.about-stats { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
-.stat-card {
-  background: var(--white); border: 1px solid #e5eaf2;
-  border-radius: 12px; padding: 22px 18px;
-  position: relative; overflow: hidden;
-  transition: transform 0.2s, box-shadow 0.2s;
-}
-.stat-card:hover { transform: translateY(-3px); box-shadow: 0 8px 32px rgba(26,70,127,0.1); }
-.stat-card::before {
-  content: ''; position: absolute; top: 0; left: 0; right: 0;
-  height: 3px; background: var(--blue);
-}
-.stat-num { font-family: 'Barlow Condensed', sans-serif; font-size: 44px; font-weight: 900; color: var(--blue); line-height: 1; margin-bottom: 5px; }
-.stat-lbl { font-size: 13px; color: #666; line-height: 1.4; }
-.trust-card { background: var(--blue); border-radius: 12px; padding: 26px 22px; }
-.trust-title { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,0.5); margin-bottom: 16px; }
-.trust-row {
-  display: flex; align-items: flex-start; gap: 12px;
-  padding: 9px 13px;
-  background: rgba(255,255,255,0.08); border: 1px solid rgba(255,255,255,0.12);
-  border-radius: 8px; margin-bottom: 8px;
-}
-.trust-row:last-child { margin-bottom: 0; }
-.trust-row i { font-size: 17px; color: #7ab8ff; flex-shrink: 0; margin-top: 2px; }
-.trust-val  { font-size: 13px; color: var(--white); line-height: 1.3; }
-.trust-lbl  { font-size: 11px; color: rgba(255,255,255,0.5); display: block; margin-top: 2px; }
-
-/* ============================================================
-   ВІДГУКИ
-   ============================================================ */
-.rev-section { background: var(--deep); padding: 100px 24px; }
-.rev-grid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 14px;
-  margin-top: 56px;
-}
-@media (max-width: 900px) { .rev-grid { grid-template-columns: repeat(2,1fr); } }
-@media (max-width: 560px) { .rev-grid { grid-template-columns: 1fr; } }
-
-.rev-card {
-  background: var(--surface);
-  border: 1px solid var(--border);
-  border-radius: var(--radius);
-  padding: 28px;
-  display: flex; flex-direction: column; gap: 14px;
-  transition: background 0.2s, border-color 0.2s, transform 0.2s;
-}
-.rev-card:hover { background: rgba(26,70,127,0.1); border-color: rgba(26,70,127,0.3); transform: translateY(-3px); }
-.rev-stars { display: flex; gap: 3px; }
-.rev-stars i { font-size: 15px; color: var(--bronze); }
-.rev-quote { font-family: 'Barlow Condensed', sans-serif; font-size: 52px; color: rgba(200,169,110,0.2); line-height: 0.8; }
-.rev-text { font-size: 14px; color: rgba(255,255,255,0.75); line-height: 1.7; flex: 1; }
-.rev-author { display: flex; align-items: center; gap: 12px; padding-top: 14px; border-top: 1px solid var(--border); }
-.rev-avatar {
-  width: 40px; height: 40px; border-radius: 50%;
-  background: var(--blue); display: flex; align-items: center; justify-content: center;
-  font-family: 'Barlow Condensed', sans-serif; font-size: 18px; font-weight: 700; color: var(--white); flex-shrink: 0;
-}
-.rev-name  { font-size: 14px; font-weight: 700; color: var(--white); }
-.rev-co    { font-size: 12px; color: var(--muted); margin-top: 2px; }
-
-/* ============================================================
-   КОНТАКТИ
-   ============================================================ */
-.ct-section { background: var(--night); padding: 80px 24px; min-height: 100vh; display: flex; align-items: center; position: relative; overflow: hidden; }
-.ct-section::before {
-  content: ''; position: absolute; top: -300px; left: -300px;
-  width: 700px; height: 700px;
-  background: radial-gradient(circle, rgba(26,70,127,0.14) 0%, transparent 70%);
-  pointer-events: none;
-}
-.ct-section::after {
-  content: ''; position: absolute; bottom: -300px; right: -300px;
-  width: 600px; height: 600px;
-  background: radial-gradient(circle, rgba(200,169,110,0.06) 0%, transparent 70%);
-  pointer-events: none;
-}
-.ct-inner { max-width: 1200px; margin: 0 auto; position: relative; z-index: 1; }
-.ct-body {
-  display: grid; grid-template-columns: 1fr 1.4fr;
-  gap: 40px; align-items: start; margin-top: 56px;
-}
-@media (max-width: 900px) { .ct-body { grid-template-columns: 1fr; } }
-
-.ct-cards { display: flex; flex-direction: column; gap: 12px; }
-.ct-card {
-  display: flex; align-items: flex-start; gap: 14px;
-  padding: 18px 20px;
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: var(--radius);
-  transition: background 0.2s, border-color 0.2s;
-  text-decoration: none;
-}
-.ct-card:hover { background: rgba(26,70,127,0.2); border-color: rgba(91,155,213,0.3); }
-.ct-card-icon {
-  width: 42px; height: 42px;
-  background: rgba(26,70,127,0.55); border: 1px solid rgba(91,155,213,0.3);
-  border-radius: 9px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;
-}
-.ct-card-icon i { font-size: 19px; color: #7ab8ff; }
-.ct-card-label { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 3px; }
-.ct-card-val   { font-size: 15px; font-weight: 700; color: var(--white); line-height: 1.3; }
-.ct-card-hint  { font-size: 12px; color: rgba(255,255,255,0.35); margin-top: 2px; }
-.ct-schedule { padding: 18px 20px; background: rgba(26,70,127,0.12); border: 1px solid rgba(26,70,127,0.28); border-radius: var(--radius); }
-.ct-sched-title { font-size: 11px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin-bottom: 12px; }
-.ct-sched-row { display: flex; justify-content: space-between; padding: 7px 0; border-bottom: 1px solid var(--border); }
-.ct-sched-row:last-child { border-bottom: none; }
-.ct-sched-day  { font-size: 14px; color: var(--muted); }
-.ct-sched-time { font-size: 14px; font-weight: 700; color: var(--white); }
-.ct-sched-off  { font-size: 14px; font-weight: 600; color: rgba(255,255,255,0.25); }
-
-.ct-form {
-  background: var(--surface); border: 1px solid var(--border);
-  border-radius: 16px; padding: 36px 32px;
-}
-@media (max-width: 600px) { .ct-form { padding: 24px 18px; } }
-.ct-form-title { font-size: 20px; font-weight: 800; color: var(--white); margin-bottom: 5px; }
-.ct-form-sub   { font-size: 14px; color: var(--muted); margin-bottom: 24px; }
-.ct-form-grid  { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
-@media (max-width: 600px) { .ct-form-grid { grid-template-columns: 1fr; } }
-.ct-form-group { display: flex; flex-direction: column; gap: 5px; }
-.ct-form-group.full { grid-column: span 2; }
-@media (max-width: 600px) { .ct-form-group.full { grid-column: span 1; } }
-.ct-label { font-size: 11px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--muted); }
-.ct-input, .ct-textarea {
-  width: 100%; padding: 12px 15px;
-  background: rgba(255,255,255,0.06); border: 1.5px solid rgba(255,255,255,0.1);
-  border-radius: 8px; font-size: 14px; color: var(--white); font-family: 'Inter', sans-serif;
-  outline: none; transition: border-color 0.2s, background 0.2s;
-}
-.ct-input::placeholder, .ct-textarea::placeholder { color: rgba(255,255,255,0.25); }
-.ct-input:focus, .ct-textarea:focus { border-color: var(--blue); background: rgba(26,70,127,0.12); }
-.ct-textarea { resize: vertical; min-height: 110px; }
-/* ct-form-btn замінено на lm-btn */
-.ct-form-note { margin-top: 10px; text-align: center; font-size: 11px; color: rgba(255,255,255,0.25); }
-
-/* ============================================================
-   ФУТЕР
-   ============================================================ */
-.footer {
-  background: #060810;
-  padding: 32px 24px;
-  border-top: 1px solid var(--border);
-}
-.footer-inner {
-  max-width: 1200px; margin: 0 auto;
-  display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 14px;
-}
-.footer-copy { font-size: 13px; color: rgba(255,255,255,0.28); }
-.footer-req  { font-size: 13px; color: rgba(255,255,255,0.28); }
-.footer-req span { color: rgba(255,255,255,0.5); }
-
-/* ============================================================
-   ІСКРИ КУРСОРУ
-   ============================================================ */
-/* Canvas іскор — поверх всього */
-#spark-canvas {
-  position: fixed;
-  inset: 0;
-  z-index: 9999;
-  pointer-events: none;
-  width: 100%;
-  height: 100%;
-}
-@media (max-width: 1024px) { .nav { padding: 0 24px; } }
-@media (max-width: 768px) {
-  .nav-links, .nav-contacts { display: none; }
-  .section { padding: 72px 20px; }
-  .about-section { padding: 72px 20px; }
-  .rev-section  { padding: 72px 20px; }
-  .ct-section   { padding: 72px 20px; }
-}
+.footer-tip{font-size:11px;color:var(--muted);margin-top:22px;line-height:1.6}
 </style>
 </head>
 <body>
 
-<canvas id="spark-canvas"></canvas>
+<header>
+  <div class="logo-mark">С</div>
+  <div class="htext">
+    <div class="t1">Сталеніт</div>
+    <div class="t2">Калькулятор ваги металу</div>
+  </div>
+</header>
 
-<!-- ============================================================
-     NAVBAR
-     ============================================================ -->
-<nav class="nav" id="navbar">
-  <a href="#home" class="nav-logo">
-    <img src="logo-stalenit-white.png" alt="Сталеніт" style="height:40px;">
-  </a>
-  <ul class="nav-links">
-    <li><a href="#home">Головна</a></li>
-    <li><a href="#services">Послуги</a></li>
-    <li><a href="#products">Продукція</a></li>
-    <li><a href="#about">Про Нас</a></li>
-    <li><a href="#contacts">Контакти</a></li>
-  </ul>
-  <div class="nav-right">
-    <div class="nav-contacts">
-      <a href="tel:+380770776606" class="nav-phone">+38 (077) 077 66 06</a>
-      <a href="mailto:stalenitua@gmail.com" class="nav-email">stalenitua@gmail.com</a>
+<div class="mobile-tabs" id="mMaterialTabs"></div>
+<div class="mobile-tabs" id="mProfileTabs" style="border-top:1px solid var(--border)"></div>
+
+<div class="wrap">
+  <aside class="sidebar">
+    <div>
+      <div class="sec-label">Матеріал</div>
+      <div class="chip-list" id="materialList"></div>
     </div>
-    <a href="price.html" target="_blank" class="nav-btn">
-      <i class="ti ti-download" style="position:relative;z-index:2;"></i> <span style="position:relative;z-index:2;">Прайс</span>
-    </a>
-  </div>
-</nav>
+    <div>
+      <div class="sec-label">Прокат</div>
+      <div class="chip-list" id="profileList"></div>
+    </div>
+  </aside>
 
-<!-- ============================================================
-     HERO
-     ============================================================ -->
-<section class="hero" id="home">
-  <video class="hero-video" id="heroVid" autoplay muted playsinline>
-    <source src="warehouse2.mp4" type="video/mp4">
-  </video>
-  <div class="hero-fade" id="heroFade"></div>
-  <div class="hero-overlay"></div>
-  <div class="hero-content">
-    <div class="hero-eyebrow"><span class="label-text">Постачальник металопрокату</span></div>
-    <h1 class="hero-title display">Найбільший вибір металопрокату для <em>вашого виробництва</em></h1>
-    <p class="hero-sub">Чорний, нержавіючий, кольоровий прокат та спецсталі.<br>Більше 30 років на ринку — швидка доставка по всій Україні.</p>
-    <a href="tel:+380770776606" class="lm-btn">
-      <i class="ti ti-phone"></i> <span>Зателефонувати</span>
-    </a>
-  </div>
-  <div class="scroll-line">
-    <span>Гортати</span>
-    <div class="scroll-line-bar"></div>
-  </div>
-</section>
+  <main class="main">
+    <div class="profile-title" id="profileTitle">Труба</div>
+    <div class="profile-sub" id="profileSub">Вкажіть розміри для розрахунку ваги</div>
+    <div id="approxNoteWrap"></div>
 
-<!-- БІГУЧИЙ РЯДОК -->
-<div class="ticker-wrap">
-  <div class="ticker-track" id="ticker"></div>
+    <div class="diagram-wrap" id="diagramWrap"></div>
+
+    <div class="form-grid" id="formGrid"></div>
+
+    <div class="footer-tip">Розрахунок орієнтовний, за стандартними довідковими густинами металів. Для точних замовлень уточнюйте вагу у менеджера.</div>
+  </main>
 </div>
 
-<!-- ============================================================
-     ПЕРЕВАГИ
-     ============================================================ -->
-<section class="section adv-section" id="advantages">
-  <div class="section-inner">
-    <div class="section-header reveal">
-      <p class="label-text">Чому обирають нас</p>
-      <h2 class="section-title display">Метал під ваше виробництво —<br>вчасно і в повному обсязі</h2>
-      <p class="section-sub">Швидкі, прозорі та зручні у роботі</p>
-    </div>
-    <div class="adv-grid">
-      <div class="adv-card reveal">
-        <div class="adv-num">01</div>
-        <div class="adv-icon"><i class="ti ti-user-check"></i></div>
-        <div class="adv-title">Особистий менеджер</div>
-        <div class="adv-desc">Один контакт вирішує все — підбір позицій, рахунок, доставка. Без черг і автовідповідачів.</div>
-      </div>
-      <div class="adv-card reveal">
-        <div class="adv-num">02</div>
-        <div class="adv-icon"><i class="ti ti-truck-delivery"></i></div>
-        <div class="adv-title">Швидка доставка</div>
-        <div class="adv-desc">Відвантаження по Києву та організація доставки по всій Україні — оперативно і надійно.</div>
-      </div>
-      <div class="adv-card reveal">
-        <div class="adv-num">03</div>
-        <div class="adv-icon"><i class="ti ti-stack"></i></div>
-        <div class="adv-title">Широкий асортимент</div>
-        <div class="adv-desc">Чорний, нержавіючий, кольоровий прокат і спецсталі — 5000+ позицій в одному місці.</div>
-      </div>
-      <div class="adv-card reveal">
-        <div class="adv-num">04</div>
-        <div class="adv-icon"><i class="ti ti-calendar-stats"></i></div>
-        <div class="adv-title">33 роки досвіду</div>
-        <div class="adv-desc">З 1993 року. Знаємо ринок, постачальників і специфіку роботи з виробничими підприємствами.</div>
-      </div>
-      <div class="adv-card reveal">
-        <div class="adv-num">05</div>
-        <div class="adv-icon"><i class="ti ti-receipt-tax"></i></div>
-        <div class="adv-title">Офіційна робота з ПДВ</div>
-        <div class="adv-desc">ТОВ, платник ПДВ — повний пакет документів, зручно для юридичних осіб та ФОП.</div>
-      </div>
-      <div class="adv-card reveal">
-        <div class="adv-num">06</div>
-        <div class="adv-icon"><i class="ti ti-clock-bolt"></i></div>
-        <div class="adv-title">Відповідь протягом години</div>
-        <div class="adv-desc">Надсилаєте запит — отримуєте прайс і терміни без зайвого очікування.</div>
-      </div>
-    </div>
+<div class="result-bar">
+  <div>
+    <div class="result-label">Загальна вага</div>
+    <div class="result-meta" id="resultMeta">—</div>
   </div>
-</section>
+  <div class="result-value"><span id="resultVal">0</span><span class="unit">кг</span></div>
+</div>
 
-<!-- ============================================================
-     ПОСЛУГИ
-     ============================================================ -->
-<section class="srv-section" id="services">
-  <video class="srv-video" id="srvVid" autoplay muted playsinline>
-    <source src="https://res.cloudinary.com/obyy6s14/video/upload/v1785499734/13053691_960_540_50fps_fga4cs.mp4" type="video/mp4">
-  </video>
-  <div class="srv-fade" id="srvFade"></div>
-  <div class="srv-overlay"></div>
-  <div class="srv-inner">
-    <div class="section-header reveal">
-      <p class="label-text">Що ми робимо</p>
-      <h2 class="section-title display">Послуги</h2>
-      <p class="section-sub">Повний цикл — від підбору металу до доставки на об'єкт</p>
-    </div>
-    <div class="srv-grid">
-      <div class="srv-card wide reveal">
-        <div>
-          <div class="srv-icon"><i class="ti ti-truck-delivery"></i></div>
-          <div class="srv-divider"></div>
-          <div class="srv-name">Доставка</div>
-          <div class="srv-desc">Власний автопарк та перевірені перевізники. По Києву та всій Україні — швидко, з повним пакетом документів.</div>
-        </div>
-        <div class="srv-info-col">
-          <div class="srv-info-row"><i class="ti ti-map-pin"></i><span>По Києву — власним транспортом</span></div>
-          <div class="srv-info-row"><i class="ti ti-map"></i><span>Вся Україна — перевіреними перевізниками</span></div>
-          <div class="srv-info-row"><i class="ti ti-clock"></i><span>Відвантаження в день замовлення</span></div>
-          <div class="srv-info-row"><i class="ti ti-file-invoice"></i><span>Повний пакет документів</span></div>
-        </div>
-      </div>
-      <div class="srv-card reveal">
-        <div class="srv-icon"><i class="ti ti-cut"></i></div>
-        <div class="srv-divider"></div>
-        <div class="srv-name">Порізка металу</div>
-        <div class="srv-tags">
-          <span class="srv-tag">Лазерна</span><span class="srv-tag">Плазмова</span>
-          <span class="srv-tag">Газова</span><span class="srv-tag">Стрічкопильна</span>
-        </div>
-        <div class="srv-desc">Ріжемо в розмір під ваше замовлення. Висока точність, чистий рез, мінімальний відхід.</div>
-      </div>
-      <div class="srv-card reveal">
-        <div class="srv-icon"><i class="ti ti-flame"></i></div>
-        <div class="srv-divider"></div>
-        <div class="srv-name">Лиття</div>
-        <div class="srv-tags">
-          <span class="srv-tag">Бронза</span><span class="srv-tag">Чавун</span><span class="srv-tag">Алюміній</span>
-        </div>
-        <div class="srv-desc">Виготовлення деталей за кресленнями або зразками. Нестандартні вироби та серійне виробництво.</div>
-      </div>
-      <div class="srv-card reveal">
-        <div class="srv-icon"><i class="ti ti-geometry"></i></div>
-        <div class="srv-divider"></div>
-        <div class="srv-name">Гнуття металу</div>
-        <div class="srv-desc">Листовий та профільний метал — гнемо під потрібний кут і радіус за кресленням замовника.</div>
-      </div>
-      <div class="srv-card reveal">
-        <div class="srv-icon"><i class="ti ti-packages"></i></div>
-        <div class="srv-divider"></div>
-        <div class="srv-name">Підбір та комплектація</div>
-        <div class="srv-desc">Менеджер підбирає позиції з наявності або під замовлення і відвантажує одним пакетом.</div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     ПРОДУКЦІЯ
-     ============================================================ -->
-<section class="prod-section" id="products">
-
-  <!-- UI поверх -->
-  <div class="prod-ui">
-    <div class="prod-header reveal">
-      <p class="label-text">Асортимент</p>
-      <h2 class="section-title display" style="margin-top:8px;color:#fff;">Продукція</h2>
-    </div>
-    <div class="prod-tabs reveal">
-      <button class="prod-tab active" onclick="switchTab('black')">Чорний прокат</button>
-      <button class="prod-tab" onclick="switchTab('stainless')">Нержавіючий прокат</button>
-      <button class="prod-tab" onclick="switchTab('color')">Кольоровий прокат</button>
-    </div>
-  </div>
-
-  <!-- ЧОРНИЙ -->
-  <div class="prod-panel active" id="panel-black">
-    <div class="prod-bg" style="background-image:url('warehouse_black.png');"></div>
-    <div class="prod-overlay"></div>
-    <div class="prod-caption">
-      <div class="prod-caption-left">
-        <div class="prod-caption-title">Чорний металопрокат</div>
-        <div class="prod-caption-tags">
-          <span class="prod-ctag">ст3 · 09г2с · ст20 · ст35</span>
-          <span class="prod-ctag">ст40х · ст45 · ст.65г · ст.У8А</span>
-          <span class="prod-ctag">ст.18хгт · ст.30хгса · ст.38х2мюа · ст.40хн2ма · ст.70</span>
-          <span class="prod-ctag accent">S235JR · S355</span>
-        </div>
-        <div class="prod-caption-list">Круги · Листи · Труби безшовні та зварні · Труби профільні · Кутники · Балки · Швелери · Арматура · Шестигранники</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- НЕРЖАВІЮЧИЙ -->
-  <div class="prod-panel" id="panel-stainless">
-    <div class="prod-bg" style="background-image:url('warehouse_stainless.png');"></div>
-    <div class="prod-overlay"></div>
-    <div class="prod-caption">
-      <div class="prod-caption-left">
-        <div class="prod-caption-title">Нержавіючий металопрокат</div>
-        <div class="prod-caption-tags">
-          <span class="prod-ctag accent">AISI 201</span>
-          <span class="prod-ctag accent">AISI 304</span>
-          <span class="prod-ctag accent">AISI 321</span>
-          <span class="prod-ctag accent">AISI 310</span>
-          <span class="prod-ctag accent">AISI 430</span>
-          <span class="prod-ctag accent">20Х13 · 30Х13 · 40Х13</span>
-        </div>
-        <div class="prod-caption-list">Круги · Листи · Труби · Полоси</div>
-      </div>
-    </div>
-  </div>
-
-  <!-- КОЛЬОРОВИЙ -->
-  <div class="prod-panel" id="panel-color">
-    <div class="prod-bg" style="background-image:url('warehouse_colors.png');"></div>
-    <div class="prod-overlay"></div>
-    <div class="prod-caption">
-      <div class="prod-caption-left">
-        <div class="prod-caption-title">Кольоровий металопрокат</div>
-        <div class="prod-caption-tags">
-          <span class="prod-ctag">АД31 · АМг2 · Д16Т · В95</span>
-          <span class="prod-ctag">М1 · М2</span>
-          <span class="prod-ctag">Л63 · ЛС59</span>
-          <span class="prod-ctag">БрОФ · БрАЖ</span>
-        </div>
-        <div class="prod-caption-list">Алюміній · Мідь · Латунь · Бронза — круги, листи, труби, втулки, прутки, кутники</div>
-      </div>
-    </div>
-  </div>
-
-</section>
-
-<!-- ============================================================
-     ПРО НАС
-     ============================================================ -->
-<section class="about-section" id="about">
-  <!-- Particles фон -->
-  <div id="about-particles" style="
-    position:absolute;inset:0;
-    background: linear-gradient(135deg, #e8f4fd 0%, #b8d9f0 50%, #d0e8f8 100%);
-    z-index:0;
-  "></div>
-  <!-- Overlay 60% прозорість -->
-  <div style="position:absolute;inset:0;background:rgba(245,247,250,0.10);z-index:1;pointer-events:none;"></div>
-
-  <div class="about-inner" style="position:relative;z-index:2;">
-    <div class="reveal">
-      <div class="about-eyebrow"><span class="label-text" style="color:var(--blue);">Хто ми</span></div>
-      <h2 class="about-title">Про<br><span>компанію</span><br>Сталеніт</h2>
-      <p class="about-text"><strong>ТОВ «Українська Компанія «Сталеніт»</strong> — постачальник чорного, нержавіючого та кольорового металопрокату, а також спеціальних сталей. Працюємо з підприємствами, виробництвами та будівельними компаніями по всій Україні.</p>
-      <p class="about-text">В асортименті — понад <strong>5 000 позицій</strong>: арматура, балки, труби, листи, кутники, швелери, круги, квадрати, шестигранники та багато іншого. Усе в наявності на складі — відвантажуємо в день замовлення.</p>
-      <p class="about-text">Офіційно зареєстровані як <strong>платник ПДВ</strong> — повний пакет документів для юридичних осіб.</p>
-      <a href="#" class="lm-btn lm-btn-bronze" download>
-        <i class="ti ti-download"></i> <span>Завантажити документи компанії</span>
-      </a>
-    </div>
-    <div class="reveal">
-      <div class="about-stats">
-        <div class="stat-card"><div class="stat-num">30+</div><div class="stat-lbl">Років досвіду в металоторгівлі</div></div>
-        <div class="stat-card"><div class="stat-num">5000+</div><div class="stat-lbl">Позицій в наявності</div></div>
-        <div class="stat-card"><div class="stat-num">24</div><div class="stat-lbl">Регіони доставки по Україні</div></div>
-        <div class="stat-card"><div class="stat-num">ПДВ</div><div class="stat-lbl">Офіційний платник ПДВ</div></div>
-      </div>
-      <div class="trust-card">
-        <div class="trust-title">Реквізити</div>
-        <div class="trust-row"><i class="ti ti-building"></i><div><div class="trust-val">ТОВ «Українська Компанія «Сталеніт»</div><span class="trust-lbl">Повна назва</span></div></div>
-        <div class="trust-row"><i class="ti ti-id-badge"></i><div><div class="trust-val">ЄДРПОУ: 45109230</div><span class="trust-lbl">Код підприємства</span></div></div>
-        <div class="trust-row"><i class="ti ti-receipt-tax"></i><div><div class="trust-val">ІПН ПДВ: 451092326576</div><span class="trust-lbl">Платник ПДВ</span></div></div>
-        <div class="trust-row"><i class="ti ti-map-pin"></i><div><div class="trust-val">м. Київ, вул. Малинська, 1</div><span class="trust-lbl">Адреса офісу</span></div></div>
-        <div class="trust-row"><i class="ti ti-briefcase"></i><div><div class="trust-val">46.72 — Оптова торгівля металами</div><span class="trust-lbl">Основний КВЕД</span></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     ВІДГУКИ
-     ============================================================ -->
-<section class="section rev-section" id="reviews">
-  <div class="section-inner">
-    <div class="section-header reveal">
-      <p class="label-text">Що кажуть клієнти</p>
-      <h2 class="section-title display">Відгуки</h2>
-      <p class="section-sub">Працюємо з виробничими підприємствами та будівельними компаніями</p>
-    </div>
-    <div class="rev-grid">
-      <div class="rev-card reveal">
-        <div class="rev-stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-        <div class="rev-quote">"</div>
-        <div class="rev-text">Співпрацюємо зі Сталенітом вже більше року. Завжди широкий асортимент, швидке відвантаження і повний пакет документів. Менеджер на зв'язку і вирішує питання оперативно.</div>
-        <div class="rev-author"><div class="rev-avatar">Р</div><div><div class="rev-name">Відділ постачання</div><div class="rev-co">ТОВ «Радіонікс»</div></div></div>
-      </div>
-      <div class="rev-card reveal">
-        <div class="rev-stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-        <div class="rev-quote">"</div>
-        <div class="rev-text">Потребували нестандартні позиції по кресленнях — порізку і підбір в одному місці. Сталеніт впорався без зайвих питань. Ціни адекватні, терміни дотримані, документи в порядку.</div>
-        <div class="rev-author"><div class="rev-avatar">У</div><div><div class="rev-name">Технічний директор</div><div class="rev-co">ТОВ «Укртехнофудз»</div></div></div>
-      </div>
-      <div class="rev-card reveal">
-        <div class="rev-stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-        <div class="rev-quote">"</div>
-        <div class="rev-text">Беремо труби та листовий метал регулярно. Зателефонував, назвав специфікацію — за годину мав рахунок і підтвердження наявності. Зручно для виробництва.</div>
-        <div class="rev-author"><div class="rev-avatar">У</div><div><div class="rev-name">Начальник відділу закупівель</div><div class="rev-co">ТОВ «Укрсанліт»</div></div></div>
-      </div>
-      <div class="rev-card reveal">
-        <div class="rev-stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-        <div class="rev-quote">"</div>
-        <div class="rev-text">Замовляємо металопрокат під виробничі потреби. Цінуємо офіційну роботу з ПДВ — бухгалтерія задоволена. Доставка по Києву в погоджений час, без затримок.</div>
-        <div class="rev-author"><div class="rev-avatar">Н</div><div><div class="rev-name">Виконавчий директор</div><div class="rev-co">ТОВ «Новатор»</div></div></div>
-      </div>
-      <div class="rev-card reveal">
-        <div class="rev-stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-        <div class="rev-quote">"</div>
-        <div class="rev-text">Звернулись з терміновим замовленням — відвантажили в день звернення. Тепер працюємо на постійній основі. Прайс актуальний, сертифікати надають одразу.</div>
-        <div class="rev-author"><div class="rev-avatar">Б</div><div><div class="rev-name">Логіст</div><div class="rev-co">ТОВ «Бікей»</div></div></div>
-      </div>
-      <div class="rev-card reveal">
-        <div class="rev-stars"><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i><i class="ti ti-star-filled"></i></div>
-        <div class="rev-quote">"</div>
-        <div class="rev-text">Обирали за принципом «один контакт — все включено». Сталеніт саме такий: і підбір, і порізка, і доставка. Зручно планувати виробничий цикл коли знаєш що метал буде вчасно.</div>
-        <div class="rev-author"><div class="rev-avatar">І</div><div><div class="rev-name">Менеджер з постачання</div><div class="rev-co">ТОВ «І2ФУДЗ»</div></div></div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     КОНТАКТИ
-     ============================================================ -->
-<section class="ct-section" id="contacts">
-  <div class="ct-inner">
-    <div class="section-header reveal">
-      <p class="label-text">Зв'яжіться з нами</p>
-      <h2 class="section-title display">Контакти</h2>
-      <p class="section-sub">Відповімо протягом години в робочий час</p>
-    </div>
-    <div class="ct-body">
-      <div class="ct-cards reveal">
-        <a href="tel:+380770776606" class="ct-card">
-          <div class="ct-card-icon"><i class="ti ti-phone"></i></div>
-          <div><div class="ct-card-label">Телефон</div><div class="ct-card-val">+38 (077) 077 66 06</div><div class="ct-card-hint">Viber · Telegram</div></div>
-        </a>
-        <a href="mailto:stalenitua@gmail.com" class="ct-card">
-          <div class="ct-card-icon"><i class="ti ti-mail"></i></div>
-          <div><div class="ct-card-label">Email</div><div class="ct-card-val">stalenitua@gmail.com</div><div class="ct-card-hint">Надсилайте специфікації та запити</div></div>
-        </a>
-        <div class="ct-card" style="cursor:default;">
-          <div class="ct-card-icon"><i class="ti ti-map-pin"></i></div>
-          <div><div class="ct-card-label">Адреса</div><div class="ct-card-val">м. Київ, вул. Малинська, 1</div><div class="ct-card-hint">ЄДРПОУ: 45109230</div></div>
-        </div>
-        <div class="ct-schedule">
-          <div class="ct-sched-title">Графік роботи</div>
-          <div class="ct-sched-row"><span class="ct-sched-day">Пн — Пт</span><span class="ct-sched-time">9:00 – 18:00</span></div>
-          <div class="ct-sched-row"><span class="ct-sched-day">Субота</span><span class="ct-sched-off">Вихідний</span></div>
-          <div class="ct-sched-row"><span class="ct-sched-day">Неділя</span><span class="ct-sched-off">Вихідний</span></div>
-        </div>
-      </div>
-      <div class="ct-form reveal">
-        <div class="ct-form-title">Надіслати запит</div>
-        <div class="ct-form-sub">Наші менеджери зв'яжуться найближчим часом</div>
-
-        <!-- Стан успіху -->
-        <div id="form-success" style="display:none;text-align:center;padding:40px 20px;">
-          <div style="
-            width:72px;height:72px;
-            border-radius:50%;
-            background:linear-gradient(135deg,#1a3a6e,#2a6abf);
-            display:flex;align-items:center;justify-content:center;
-            margin:0 auto 20px;
-            box-shadow:0 0 0 1px rgba(0,0,0,0.3),0 8px 32px rgba(26,70,127,0.4),inset 0 1px 0 rgba(255,255,255,0.15);
-            animation:successPop 0.5s cubic-bezier(0.34,1.56,0.64,1) forwards;
-          ">
-            <i class="ti ti-check" style="font-size:32px;color:#fff;"></i>
-          </div>
-          <div style="font-size:20px;font-weight:800;color:#fff;margin-bottom:8px;">Запит відправлено!</div>
-          <div style="font-size:14px;color:var(--muted);">Менеджер зв'яжеться з вами найближчим часом</div>
-        </div>
-
-        <!-- Форма -->
-        <form id="contact-form" action="https://formspree.io/f/maewngzz" method="POST">
-          <div class="ct-form-grid">
-            <div class="ct-form-group">
-              <label class="ct-label">Ім'я</label>
-              <input class="ct-input" type="text" name="name" placeholder="Ваше ім'я" required>
-            </div>
-            <div class="ct-form-group">
-              <label class="ct-label">Телефон</label>
-              <input class="ct-input" type="tel" name="phone" placeholder="+38 (___) ___ __ __" required>
-            </div>
-            <div class="ct-form-group">
-              <label class="ct-label">Компанія</label>
-              <input class="ct-input" type="text" name="company" placeholder="Назва компанії">
-            </div>
-            <div class="ct-form-group">
-              <label class="ct-label">Email</label>
-              <input class="ct-input" type="email" name="email" placeholder="email@company.ua">
-            </div>
-            <div class="ct-form-group full">
-              <label class="ct-label">Що потрібно?</label>
-              <textarea class="ct-textarea" name="message" placeholder="Наприклад: Труба 40×20×2, 50 м.п. Або додайте специфікацію..."></textarea>
-            </div>
-          </div>
-          <button type="submit" class="lm-btn" id="submit-btn" style="width:100%;margin-top:18px;border-radius:8px;">
-            <i class="ti ti-send"></i> <span>Надіслати запит</span>
-          </button>
-          <div class="ct-form-note">Натискаючи кнопку, ви погоджуєтесь з умовами обробки даних</div>
-        </form>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ============================================================
-     ФУТЕР
-     ============================================================ -->
-<footer class="footer">
-  <div class="footer-inner">
-    <div class="footer-copy">© 2024 ТОВ «Українська Компанія «Сталеніт». Всі права захищені.</div>
-    <div class="footer-req">ЄДРПОУ: <span>45109230</span> &nbsp;·&nbsp; ПДВ: <span>451092326576</span></div>
-  </div>
-</footer>
-
-<!-- ============================================================
-     JAVASCRIPT
-     ============================================================ -->
 <script>
-/* NAVBAR scroll */
-const navbar = document.getElementById('navbar');
-window.addEventListener('scroll', () => {
-  navbar.classList.toggle('scrolled', window.scrollY > 40);
-});
+/* ═══ DATA ═══ */
+const MATERIALS = [
+  {key:'steel_black', name:'Сталь чорна', density:7850},
+  {key:'steel_stainless', name:'Нержавіюча сталь', density:7900},
+  {key:'titanium', name:'Титан', density:4500},
+  {key:'nichrome', name:'Ніхром', density:8400},
+  {key:'copper', name:'Мідь', density:8900},
+  {key:'aluminum', name:'Алюміній', density:2700},
+  {key:'cast_iron', name:'Чавун', density:7200},
+  {key:'brass', name:'Латунь', density:8500},
+  {key:'bronze', name:'Бронза', density:8700},
+];
 
-/* HERO відео плавний цикл */
-const heroVid = document.getElementById('heroVid');
-const heroFade = document.getElementById('heroFade');
-heroVid.addEventListener('timeupdate', () => {
-  if (heroVid.duration - heroVid.currentTime <= 1.2 && !heroFade.classList.contains('active'))
-    heroFade.classList.add('active');
-});
-heroVid.addEventListener('ended', () => {
-  heroVid.currentTime = 0; heroVid.play();
-  setTimeout(() => heroFade.classList.remove('active'), 200);
-});
+const PROFILES = [
+  {key:'pipe', name:'Труба'},
+  {key:'square', name:'Квадрат'},
+  {key:'round', name:'Круг / Пруток'},
+  {key:'angle', name:'Кутник'},
+  {key:'sheet', name:'Лист'},
+  {key:'strip', name:'Смуга'},
+  {key:'profile_pipe', name:'Труба профільна'},
+  {key:'hex', name:'Шестигранник'},
+  {key:'channel', name:'Швелер'},
+  {key:'beam', name:'Балка'},
+];
 
-/* ПОСЛУГИ відео плавний цикл */
-const srvVid = document.getElementById('srvVid');
-const srvFade = document.getElementById('srvFade');
-if (srvVid) {
-  srvVid.addEventListener('timeupdate', () => {
-    if (srvVid.duration - srvVid.currentTime <= 1.0 && !srvFade.classList.contains('active'))
-      srvFade.classList.add('active');
-  });
-  srvVid.addEventListener('ended', () => {
-    srvVid.currentTime = 0; srvVid.play();
-    setTimeout(() => srvFade.classList.remove('active'), 150);
-  });
+/* field defs per profile: [key, label, unit] */
+const FIELDS = {
+  pipe:         [['d','Зовнішній діаметр','мм'],['wall','Товщина стінки','мм'],['len','Довжина','м']],
+  square:       [['side','Сторона','мм'],['len','Довжина','м']],
+  round:        [['d','Діаметр','мм'],['len','Довжина','м']],
+  angle:        [['a','Полиця A','мм'],['b','Полиця B','мм'],['t','Товщина','мм'],['len','Довжина','м']],
+  sheet:        [['w','Ширина','мм'],['t','Товщина','мм'],['len','Довжина','м']],
+  strip:        [['w','Ширина','мм'],['t','Товщина','мм'],['len','Довжина','м']],
+  profile_pipe: [['a','Сторона A','мм'],['b','Сторона B','мм'],['wall','Товщина стінки','мм'],['len','Довжина','м']],
+  hex:          [['s','Розмір "під ключ"','мм'],['len','Довжина','м']],
+  channel:      [['h','Висота','мм'],['b','Ширина полиці','мм'],['s','Товщина стінки','мм'],['t','Товщина полиці','мм'],['len','Довжина','м']],
+  beam:         [['h','Висота','мм'],['b','Ширина полиці','мм'],['s','Товщина стінки','мм'],['t','Товщина полиці','мм'],['len','Довжина','м']],
+};
+
+const APPROX = new Set(['channel','beam']);
+
+/* area(mm²) calculators — return null if invalid */
+function calcArea(profile, v){
+  const n = k => parseFloat(v[k]);
+  switch(profile){
+    case 'pipe': {
+      const D=n('d'), w=n('wall');
+      if(!D||!w||w*2>=D) return null;
+      const d = D - 2*w;
+      return Math.PI/4*(D*D - d*d);
+    }
+    case 'square': {
+      const a=n('side'); if(!a) return null;
+      return a*a;
+    }
+    case 'round': {
+      const d=n('d'); if(!d) return null;
+      return Math.PI/4*d*d;
+    }
+    case 'angle': {
+      const a=n('a'), b=n('b'), t=n('t');
+      if(!a||!b||!t) return null;
+      return t*(a+b-t);
+    }
+    case 'sheet':
+    case 'strip': {
+      const w=n('w'), t=n('t');
+      if(!w||!t) return null;
+      return w*t;
+    }
+    case 'profile_pipe': {
+      const a=n('a'), b=n('b'), w=n('wall');
+      if(!a||!b||!w) return null;
+      const a2=Math.max(0,a-2*w), b2=Math.max(0,b-2*w);
+      return a*b - a2*b2;
+    }
+    case 'hex': {
+      const s=n('s'); if(!s) return null;
+      return (Math.sqrt(3)/2)*s*s;
+    }
+    case 'channel': {
+      const h=n('h'), b=n('b'), s=n('s'), t=n('t');
+      if(!h||!b||!s||!t) return null;
+      return s*h + 2*t*(b-s);
+    }
+    case 'beam': {
+      const h=n('h'), b=n('b'), s=n('s'), t=n('t');
+      if(!h||!b||!s||!t) return null;
+      return s*(h-2*t) + 2*b*t;
+    }
+  }
+  return null;
 }
 
-/* БІГУЧИЙ РЯДОК */
-const grades = ['ст3','09г2с','ст20','ст35','ст40х','ст45','AISI 304','AISI 316','AISI 321','АД31','АМг2','Д16Т','М1','М2','Л63','ЛС59','БрОФ','S235JR','S355','ст.65г','ст.У8А','ст.18хгт','ст.30хгса','В95','AISI 430','20Х13','30Х13','40Х13'];
-const ticker = document.getElementById('ticker');
-const items = [...grades, ...grades].map(g => {
-  const el = document.createElement('span');
-  el.className = 'ticker-item' + (Math.random() > 0.8 ? ' accent' : '');
-  el.textContent = g;
-  return el;
-});
-items.forEach(el => ticker.appendChild(el));
+/* ═══ SVG DIAGRAMS (simple, brand-colored) ═══ */
+const STROKE = '#2c5d9e';
+const FILL = 'rgba(26,70,127,.35)';
+const GOLD = '#c8a96e';
 
-/* SCROLL REVEAL */
-const reveals = document.querySelectorAll('.reveal');
-const observer = new IntersectionObserver((entries) => {
-  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
-}, { threshold: 0.12 });
-reveals.forEach(el => observer.observe(el));
-
-/* FORMSPREE — обробка форми */
-const contactForm = document.getElementById('contact-form');
-const formSuccess = document.getElementById('form-success');
-const submitBtn   = document.getElementById('submit-btn');
-
-if (contactForm) {
-  contactForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-    submitBtn.style.opacity = '0.7';
-    submitBtn.style.pointerEvents = 'none';
-    submitBtn.querySelector('span').textContent = 'Відправляємо...';
-    try {
-      const response = await fetch('https://formspree.io/f/maewngzz', {
-        method: 'POST',
-        body: new FormData(contactForm),
-        headers: { 'Accept': 'application/json' }
-      });
-      if (response.ok) {
-        contactForm.style.display = 'none';
-        formSuccess.style.display = 'block';
-      } else {
-        submitBtn.querySelector('span').textContent = 'Помилка. Спробуйте ще раз';
-        submitBtn.style.opacity = '1';
-        submitBtn.style.pointerEvents = 'auto';
-      }
-    } catch(err) {
-      submitBtn.querySelector('span').textContent = 'Помилка. Спробуйте ще раз';
-      submitBtn.style.opacity = '1';
-      submitBtn.style.pointerEvents = 'auto';
-    }
-  });
+function svgWrap(inner, vb='0 0 220 180'){
+  return `<svg viewBox="${vb}" width="220" height="180" fill="none">${inner}</svg>`;
+}
+function dimLine(x1,y1,x2,y2,label,offset=0){
+  return `<line x1="${x1}" y1="${y1}" x2="${x2}" y2="${y2}" stroke="${GOLD}" stroke-width="1"/>
+    <text x="${(x1+x2)/2}" y="${(y1+y2)/2 - 6 + offset}" fill="${GOLD}" font-size="10" text-anchor="middle" font-family="Inter">${label}</text>`;
 }
 
-/* PARTICLES — блок Про Нас */
-(function() {
-  const script = document.createElement('script');
-  script.src = 'https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js';
-  script.async = true;
-  document.body.appendChild(script);
-  script.onload = function() {
-    window.particlesJS('about-particles', {
-      particles: {
-        number: { value: 80, density: { enable: true, value_area: 800 } },
-        color: { value: '#1a467f' },
-        shape: {
-          type: 'circle',
-          stroke: { width: 0.5, color: '#2558a0' }
-        },
-        opacity: {
-          value: 0.35,
-          random: true,
-          anim: { enable: true, speed: 0.8, opacity_min: 0.1 }
-        },
-        size: {
-          value: 3,
-          random: true,
-          anim: { enable: true, speed: 1.5, size_min: 0.8 }
-        },
-        line_linked: {
-          enable: true,
-          distance: 150,
-          color: '#1a467f',
-          opacity: 0.2,
-          width: 1
-        },
-        move: {
-          enable: true,
-          speed: 1.2,
-          random: true,
-          out_mode: 'bounce'
-        }
-      },
-      interactivity: {
-        detect_on: 'canvas',
-        events: {
-          onhover: { enable: true, mode: 'grab' },
-          onclick: { enable: true, mode: 'push' },
-          resize: true
-        },
-        modes: {
-          grab: { distance: 180, line_linked: { opacity: 0.5 } },
-          push: { particles_nb: 3 }
-        }
-      },
-      retina_detect: true
-    });
-  };
-})();
-document.querySelectorAll('.lm-btn, .nav-btn').forEach(btn => {
-  btn.addEventListener('click', function(e) {
-    const rect = this.getBoundingClientRect();
-    const ripple = document.createElement('span');
-    ripple.className = 'lm-ripple';
-    ripple.style.left = (e.clientX - rect.left) + 'px';
-    ripple.style.top  = (e.clientY - rect.top) + 'px';
-    this.appendChild(ripple);
-    setTimeout(() => ripple.remove(), 650);
+const DIAGRAMS = {
+  pipe: svgWrap(`
+    <circle cx="110" cy="90" r="62" stroke="${STROKE}" stroke-width="14" fill="${FILL}"/>
+    ${dimLine(48,90,172,20,'D')}
+  `),
+  square: svgWrap(`
+    <rect x="55" y="35" width="110" height="110" stroke="${STROKE}" stroke-width="3" fill="${FILL}"/>
+    ${dimLine(55,35,165,35,'a')}
+  `),
+  round: svgWrap(`
+    <circle cx="110" cy="90" r="55" stroke="${STROKE}" stroke-width="3" fill="${FILL}"/>
+    ${dimLine(55,90,165,90,'D')}
+  `),
+  angle: svgWrap(`
+    <path d="M50 40 L50 150 L160 150 L160 120 L80 120 L80 40 Z" stroke="${STROKE}" stroke-width="3" fill="${FILL}"/>
+    ${dimLine(50,40,50,150,'A',60)}
+  `),
+  sheet: svgWrap(`
+    <rect x="40" y="55" width="140" height="70" stroke="${STROKE}" stroke-width="3" fill="${FILL}"/>
+    ${dimLine(40,55,180,55,'ширина')}
+  `),
+  strip: svgWrap(`
+    <rect x="30" y="75" width="160" height="28" stroke="${STROKE}" stroke-width="3" fill="${FILL}"/>
+    ${dimLine(30,75,190,75,'ширина')}
+  `),
+  profile_pipe: svgWrap(`
+    <rect x="45" y="40" width="130" height="100" rx="6" stroke="${STROKE}" stroke-width="14" fill="${FILL}"/>
+    ${dimLine(45,40,175,40,'A')}
+  `),
+  hex: svgWrap(`
+    <polygon points="110,30 165,60 165,120 110,150 55,120 55,60" stroke="${STROKE}" stroke-width="3" fill="${FILL}"/>
+    ${dimLine(55,90,165,90,'S')}
+  `),
+  channel: svgWrap(`
+    <path d="M55 30 L55 150 L85 150 L85 60 L150 60 L150 30 Z" stroke="${STROKE}" stroke-width="3" fill="${FILL}"/>
+    ${dimLine(55,30,55,150,'h',60)}
+  `),
+  beam: svgWrap(`
+    <path d="M50 30 L170 30 L170 55 L120 55 L120 125 L170 125 L170 150 L50 150 L50 125 L100 125 L100 55 L50 55 Z" stroke="${STROKE}" stroke-width="3" fill="${FILL}"/>
+    ${dimLine(50,30,50,150,'h',60)}
+  `),
+};
+
+/* ═══ STATE ═══ */
+let curMaterial = 'steel_black';
+let curProfile = 'pipe';
+
+/* ═══ RENDER ═══ */
+function renderMaterialList(){
+  const list = document.getElementById('materialList');
+  list.innerHTML = MATERIALS.map(m => `
+    <button class="chip${m.key===curMaterial?' active':''}" onclick="setMaterial('${m.key}')">
+      <span>${m.name}</span><span class="dot"></span>
+    </button>`).join('');
+
+  const mtabs = document.getElementById('mMaterialTabs');
+  mtabs.innerHTML = MATERIALS.map(m => `
+    <button class="mtab${m.key===curMaterial?' active':''}" onclick="setMaterial('${m.key}')">${m.name}</button>`).join('');
+}
+
+function renderProfileList(){
+  const list = document.getElementById('profileList');
+  list.innerHTML = PROFILES.map(p => `
+    <button class="chip${p.key===curProfile?' active':''}" onclick="setProfile('${p.key}')">
+      <span>${p.name}</span><span class="dot"></span>
+    </button>`).join('');
+
+  const mtabs = document.getElementById('mProfileTabs');
+  mtabs.innerHTML = PROFILES.map(p => `
+    <button class="mtab${p.key===curProfile?' active':''}" onclick="setProfile('${p.key}')">${p.name}</button>`).join('');
+}
+
+function renderForm(){
+  const p = PROFILES.find(x=>x.key===curProfile);
+  document.getElementById('profileTitle').textContent = p.name;
+  document.getElementById('diagramWrap').innerHTML = DIAGRAMS[curProfile];
+
+  const approxWrap = document.getElementById('approxNoteWrap');
+  approxWrap.innerHTML = APPROX.has(curProfile)
+    ? `<div class="approx-note">&#9888; Наближений розрахунок — для точних замовлень звіряйте з ГОСТ-таблицею профілю</div>`
+    : '';
+
+  const grid = document.getElementById('formGrid');
+  grid.innerHTML = FIELDS[curProfile].map(([key,label,unit]) => `
+    <div class="field">
+      <label>${label}</label>
+      <div class="input-row">
+        <input type="number" inputmode="decimal" min="0" step="any" id="f_${key}" oninput="calculate()" placeholder="0">
+        <span class="unit">${unit}</span>
+      </div>
+    </div>`).join('');
+}
+
+function setMaterial(key){
+  curMaterial = key;
+  renderMaterialList();
+  calculate();
+}
+function setProfile(key){
+  curProfile = key;
+  renderProfileList();
+  renderForm();
+  calculate();
+}
+
+function calculate(){
+  const values = {};
+  FIELDS[curProfile].forEach(([key]) => {
+    const el = document.getElementById('f_'+key);
+    values[key] = el ? el.value : '';
   });
-});
+  const area = calcArea(curProfile, values);
+  const mat = MATERIALS.find(m=>m.key===curMaterial);
+  const resultEl = document.getElementById('resultVal');
+  const metaEl = document.getElementById('resultMeta');
 
-/* ІСКРИ КУРСОРУ */
-(function() {
-  const canvas = document.getElementById('spark-canvas');
-  const ctx = canvas.getContext('2d');
-  let sparks = [];
-  let mouse = { x: 0, y: 0 };
-  let moving = false;
-  let moveTimer;
-
-  function resize() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
+  if(area === null || area <= 0){
+    resultEl.textContent = '0';
+    metaEl.textContent = 'Заповніть розміри';
+    return;
   }
-  resize();
-  window.addEventListener('resize', resize);
-
-  window.addEventListener('mousemove', e => {
-    mouse.x = e.clientX;
-    mouse.y = e.clientY;
-    moving = true;
-    clearTimeout(moveTimer);
-    moveTimer = setTimeout(() => { moving = false; }, 100);
-
-    // Спавн 2-3 іскри при русі
-    if (Math.random() < 0.6) {
-      for (let i = 0; i < 2; i++) {
-        sparks.push({
-          x: mouse.x + (Math.random() - 0.5) * 8,
-          y: mouse.y + (Math.random() - 0.5) * 8,
-          vx: (Math.random() - 0.5) * 3,
-          vy: -(Math.random() * 2.5 + 0.5),
-          life: 1,
-          size: Math.random() * 2 + 0.5,
-          hue: Math.random() > 0.6 ? '#c8a96e' : '#5b9bd5'
-        });
-      }
-    }
-  });
-
-  function frame() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    sparks = sparks.filter(s => s.life > 0);
-    sparks.forEach(s => {
-      s.x += s.vx;
-      s.y += s.vy;
-      s.vy += 0.08;
-      s.vx *= 0.98;
-      s.life -= 0.035;
-      const a = Math.max(0, s.life);
-      ctx.beginPath();
-      ctx.arc(s.x, s.y, s.size * a, 0, Math.PI * 2);
-      ctx.fillStyle = s.hue === '#c8a96e'
-        ? `rgba(200,169,110,${a})`
-        : `rgba(91,155,213,${a})`;
-      ctx.fill();
-    });
-    requestAnimationFrame(frame);
+  const len = parseFloat(values.len) || 0;
+  if(FIELDS[curProfile].some(f=>f[0]==='len') && len<=0){
+    resultEl.textContent = '0';
+    metaEl.textContent = 'Вкажіть довжину';
+    return;
   }
-  frame();
-})();
 
-function switchTab(id) {
-  document.querySelectorAll('.prod-tab').forEach((t,i) => {
-    t.classList.toggle('active', ['black','stainless','color'][i] === id);
+  // volume(m3) = area(mm2) * 1e-6 * length(m)
+  const lenM = FIELDS[curProfile].some(f=>f[0]==='len') ? len : 1;
+  const volume = area * 1e-6 * lenM;
+  const weight = volume * mat.density;
+
+  resultEl.textContent = weight >= 100 ? weight.toFixed(1) : weight.toFixed(3);
+  metaEl.textContent = `${mat.name} · густина ${mat.density} кг/м³`;
+}
+
+/* ═══ INIT ═══ */
+renderMaterialList();
+renderProfileList();
+renderForm();
+calculate();
+
+/* PWA service worker */
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(()=>{});
   });
-  document.querySelectorAll('.prod-panel').forEach(p => p.classList.remove('active'));
-  document.getElementById('panel-' + id).classList.add('active');
 }
 </script>
 </body>
